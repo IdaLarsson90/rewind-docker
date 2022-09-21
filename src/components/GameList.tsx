@@ -9,10 +9,11 @@ const GameList = () => {
    const { games } = useContext(GameContext)
    const { players }= useContext(PlayerContext)
    
-  //  const [pickedPlayer, setPickedPlayer] = useState({
-  //   name:""
-  // });
-  const [sorted, setSorted] = useState<boolean>(false)
+   const [pickedPlayer, setPickedPlayer] = useState({
+    name:""
+  });
+  const [gamesToShow, setGamesToShow] = useState<Games[]>(games)
+  const [isSorted, setIsSorted] = useState<boolean>(false)
   const [onePlayerList, setOnePlayerList] = useState([])
   const [sortedList, setSortedList] = useState([{
     game: "",
@@ -25,7 +26,7 @@ const GameList = () => {
   }]);
 
   const sortByDate = () => {
-    setSorted(true);
+    setIsSorted(true);
     const gamesCopy = [...games]
     console.log("Sorterar")
     console.log("copy", gamesCopy)
@@ -38,22 +39,21 @@ const GameList = () => {
       }
       return 0;
     })
-    setSortedList(gamesCopy)
+    setGamesToShow(gamesCopy)
 }
 
-const handleFilterByPlayer = (event) =>{
-  const pickedPlayer = event.target.value;
-  const onePlayerList = games.filter((game) => {
-    if (pickedPlayer === game.playerOneName || pickedPlayer === game.playerTwoName) {
-      return game;
+const handleFilterByPlayer = (event:any) =>{
+  const query = event.target.value
+  let filteredList = games.filter((game) => { 
+    if(game.playerTwoName === query || game.playerOneName === query) {
+      return game
     }
-    else {
-      return;
-    }
-  });
-  console.log(onePlayerList)
-
+  })
+  console.log(filteredList)
+  setGamesToShow(filteredList)
+  
 }
+
 
   return (
     <div className="gamesList">
@@ -71,15 +71,45 @@ const handleFilterByPlayer = (event) =>{
           <th>Spelare 2</th>
           <th>Resultat</th>
         </tr>
-        {sorted ? (
-        sortedList.map((game:Games)=>{
-          return ( <GameDetails game={game} key={game.id}/> )
-          })) :
-          (
+         { isSorted ? (
+            gamesToShow.map((game:Games)=>{
+              return ( <GameDetails game={game} key={game.id}/> )
+              })) :
+              (
+              gamesToShow.map((game:Games)=>{
+                return ( <GameDetails game={game} key={game.id}/> )
+              })) }
+        {/* {(() => {
+        if (sorted === false) {
+          console.log(games)
           games.map((game:Games)=>{
-            return ( <GameDetails game={game} key={game.id}/> )
-          })) 
+            console.log(game)
+            return (
+            <GameDetails game={game} key={game.id}/> )
+          })
+        } else if (2 == 2) {
+          return (
+            <div>otherCase</div>
+          )
+        } else {
+          return (
+            <div>catch all</div>
+          )
         }
+      })()}  */}
+{        // if(onePlayerList.length == 0) {
+        //     sorted ? (
+        //     sortedList.map((game:Games)=>{
+        //       return ( <GameDetails game={game} key={game.id}/> )
+        //       })) :
+        //       (
+        //       games.map((game:Games)=>{
+        //         return ( <GameDetails game={game} key={game.id}/> )
+        //       })) 
+        //     } else {
+
+            }
+        
         </tbody>
       </table>
     </div>
