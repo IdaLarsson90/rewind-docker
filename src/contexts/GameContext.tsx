@@ -1,9 +1,10 @@
 import {createContext, useEffect, useState} from "react";
+import { Games } from "../models/data";
 
 export const GameContext = createContext<any | null>(null);
 
 const GameContextProvider = (props:any) => {
-    const [games, setGames] = useState<any>([
+    const [games, setGames] = useState<Games[]>([
         {
             game: "Schack",
             date: "2022-06-25",

@@ -17,3 +17,8 @@ export interface Games {
   playerTwoResult: string;
   id:number
 }
+
+export interface Players {
+  name: string;
+  numberOfWins: number
+}
