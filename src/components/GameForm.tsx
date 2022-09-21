@@ -26,7 +26,7 @@ const GameForm = () =>{
         <form className="form" onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="game">Välj spel:</label>
-                <select onChange={handleChange} name="game" id="game" value={formData.game}>
+                <select onChange={handleChange} name="game" id="game">
                     <option hidden={true} value="">Välj spel:</option>
                     <option value="Schack">Schack</option>
                     <option value="Kalaha">Kalaha</option>

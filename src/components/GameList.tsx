@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import { GameContext } from "../contexts/GameContext"
 import { PlayerContext } from "../contexts/PlayerContext"
 import { Games } from "../models/data"
@@ -9,11 +9,11 @@ const GameList = () => {
    const { games } = useContext(GameContext)
    const { players }= useContext(PlayerContext)
    
-   const [pickedPlayer, setPickedPlayer] = useState({
-    name:""
-  });
+  //  const [pickedPlayer, setPickedPlayer] = useState({
+  //   name:""
+  // });
   const [sorted, setSorted] = useState<boolean>(false)
-  // const [onePlayerList, setOnePlayerList] = useState()
+  const [onePlayerList, setOnePlayerList] = useState([])
   const [sortedList, setSortedList] = useState([{
     game: "",
     date: "",
@@ -41,19 +41,23 @@ const GameList = () => {
     setSortedList(gamesCopy)
 }
 
-const handleFilterByPlayer = () =>{
-  games.filter((game)=>{
-    if (game.playerOneName || game.playerTwoName == pickedPlayer.name) {
-      console.log("yeo")
+const handleFilterByPlayer = (event) =>{
+  const pickedPlayer = event.target.value;
+  const onePlayerList = games.filter((game) => {
+    if (pickedPlayer === game.playerOneName || pickedPlayer === game.playerTwoName) {
+      return game;
     }
-  })
+    else {
+      return;
+    }
+  });
+  console.log(onePlayerList)
+
 }
 
-
- console.log("Vald:", pickedPlayer)
   return (
     <div className="gamesList">
-      <select onChange={handleFilterByPlayer} name="name" id="name" value={pickedPlayer.name}>
+      <select onChange={handleFilterByPlayer} name="name" id="name" >
         <option hidden={true} value="">Visa alla:</option>
         {players.map((player:any) => <option value={player.name} key={player.name}>{player.name}</option>)}
       </select>
