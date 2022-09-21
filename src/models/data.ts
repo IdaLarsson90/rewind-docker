@@ -15,4 +15,5 @@ export interface Games {
   playerOneResult: string;
   playerTwoName: string;
   playerTwoResult: string;
+  id:number
 }
