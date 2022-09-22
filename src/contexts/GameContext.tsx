@@ -1,9 +1,12 @@
-import {createContext, useEffect, useState} from "react";
+import {createContext, useEffect, useContext, useState} from "react";
 import { Games } from "../models/data";
+
 
 export const GameContext = createContext<any | null>(null);
 
 const GameContextProvider = (props:any) => {
+    // const { sortByDate } = useContext(FilterContext)
+
     const [games, setGames] = useState<Games[]>([
         {
             game: "Schack",
@@ -11,7 +14,7 @@ const GameContextProvider = (props:any) => {
             playerOneName: "Ida",
             playerOneResult: "won",
             playerTwoName: "Anders",
-            playerTwoResult: "lost",
+            playerTwoResult: "won",
             id:1
         },{
             game: "Memory",
@@ -69,6 +72,70 @@ const GameContextProvider = (props:any) => {
             playerTwoName: "Anders",
             playerTwoResult: "lost",
             id:8
+        },{
+            game: "Schack",
+            date: "2022-06-25",
+            playerOneName: "Ida",
+            playerOneResult: "won",
+            playerTwoName: "Anders",
+            playerTwoResult: "won",
+            id:9
+        },{
+            game: "Memory",
+            date: "2022-06-28",
+            playerOneName: "Ida",
+            playerOneResult: "won",
+            playerTwoName: "Julia",
+            playerTwoResult: "lost",
+            id:10
+        },{
+            game: "Memory",
+            date: "2022-06-27",
+            playerOneName: "Jesus",
+            playerOneResult: "won",
+            playerTwoName: "Julia",
+            playerTwoResult: "lost",
+            id:11
+        },{
+            game: "Kalaha",
+            date: "2022-07-28",
+            playerOneName: "Ida",
+            playerOneResult: "won",
+            playerTwoName: "Jesus",
+            playerTwoResult: "lost",
+            id:12
+        },{
+            game: "Schack",
+            date: "2022-06-30",
+            playerOneName: "Ida",
+            playerOneResult: "won",
+            playerTwoName: "Anders",
+            playerTwoResult: "won",
+            id:13
+        },{
+            game: "Memory",
+            date: "2022-06-25",
+            playerOneName: "Ida",
+            playerOneResult: "won",
+            playerTwoName: "Julia",
+            playerTwoResult: "lost",
+            id:14
+        },{
+            game: "Memory",
+            date: "2022-06-26",
+            playerOneName: "Ida",
+            playerOneResult: "won",
+            playerTwoName: "Julia",
+            playerTwoResult: "lost",
+            id:15
+        },{
+            game: "Kalaha",
+            date: "2022-05-29",
+            playerOneName: "Jesus",
+            playerOneResult: "won",
+            playerTwoName: "Anders",
+            playerTwoResult: "lost",
+            id:16
         }
     ])
     const addGame = (formData:any, setFormData:any) => { 
@@ -97,6 +164,7 @@ const GameContextProvider = (props:any) => {
 
     useEffect(() => {
       localStorage.setItem('games', JSON.stringify(games))
+    //   sortByDate()
     }, [games])
     
 

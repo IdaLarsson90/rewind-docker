@@ -1,33 +1,37 @@
-import { useContext } from "react"
+import { useContext, useState, useEffect } from "react"
 import { GameContext } from "../contexts/GameContext"
-import { Games } from "../models/data"
-import bin from "../assets/bin.svg"
-import pen from "../assets/pen.svg"
-
+import { PlayerContext } from "../contexts/PlayerContext"
+import { FilterContext } from "../contexts/FilterContext"
 
 interface Props{
-    game: Games;
+    uniqueGames: any;
 }
 
-const GameDetails = ({game} :Props) => {
-    const {removeGame} = useContext(GameContext)
+const GameDetails = ({uniqueGames}: Props) => {
+    const { games } = useContext(GameContext)
+    const { players, setPlayers }= useContext(PlayerContext)
+    const { filterByGame, pickedGame, gamesToShow } = useContext(FilterContext)
+    
+ 
+   
+
+    
+    
     return(
-        <tr>
-            <td>{game.game}</td>
-            <td>{game.date}</td>
-            <td>{game.playerOneName}</td>
-            <td>{game.playerOneResult}</td>
-            <td>{game.playerTwoName}</td>
-            <td>{game.playerTwoResult}</td>
-            <td><button onClick={()=>removeGame(game.id)}>
-                <img src={bin}/>
-                Radera</button>
-            </td>
-            <td><button>
-                <img src={pen}/>
-                Redigera</button>
-            </td>
-        </tr>
+        <div>
+          <select onChange={filterByGame} name="name" id="name" >
+          <option value="all">Visa alla spel:</option>
+          {
+            uniqueGames.map((game:any) => 
+            <option value={game} key={game}>{game}</option>)
+          }
+          </select>
+          {
+            pickedGame !=="all" ? (
+                <p> {"Någon"} har vunnit flest antal gånger i {pickedGame} någonsin</p>
+            ) : ( <></>)
+            } 
+        </div> 
     )
 }
 export default GameDetails

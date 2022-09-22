@@ -1,10 +1,11 @@
 import { useState, useContext } from "react";
 import { FormState, Games } from "../models/data"
 import { GameContext } from "../contexts/GameContext"
-
+import { PlayerContext } from "../contexts/PlayerContext"
 
 const GameForm = () =>{
-    const { addGame } = useContext(GameContext)
+    const { players, setPlayers }= useContext(PlayerContext)
+    const { addGame, games } = useContext(GameContext)
     const [formData, setFormData] = useState<FormState>({
         game: "",
         date: "",
@@ -20,6 +21,7 @@ const GameForm = () =>{
     }
     const handleChange = (event: any) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
+        
     }
     
     return (

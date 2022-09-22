@@ -4,6 +4,8 @@ import GameContextProvider from './contexts/GameContext'
 
 import GameList from './components/GameList'
 import PlayerContextProvider from './contexts/PlayerContext'
+import FilterContextProvider from './contexts/FilterContext'
+import FilterBar from './components/FilterBar'
 
 
 function App() {
@@ -11,8 +13,11 @@ function App() {
     <div className="app">
       <GameContextProvider>
         <PlayerContextProvider>
-          <GameForm />
-          <GameList />
+          <FilterContextProvider>
+            <GameForm />
+            <FilterBar/>
+            <GameList />
+          </FilterContextProvider>
         </PlayerContextProvider>
       </GameContextProvider>
     </div>
