@@ -10,7 +10,7 @@ interface Props{
 const GameDetails = ({uniqueGames}: Props) => {
     const { games } = useContext(GameContext)
     const { players, setPlayers }= useContext(PlayerContext)
-    const { filterByGame, pickedGame, gamesToShow } = useContext(FilterContext)
+    const { filterByGame, pickedGame, gamesToShow, winner } = useContext(FilterContext)
     
  
    
@@ -28,7 +28,7 @@ const GameDetails = ({uniqueGames}: Props) => {
           </select>
           {
             pickedGame !=="all" ? (
-                <p> {"Någon"} har vunnit flest antal gånger i {pickedGame} någonsin</p>
+                <p> {winner.map((e)=>  {return <span>  e.namn </span>})} har vunnit flest antal gånger i {pickedGame} någonsin</p>
             ) : ( <></>)
             } 
         </div> 

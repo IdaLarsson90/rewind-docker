@@ -12,7 +12,7 @@ const GameContextProvider = (props:any) => {
             game: "Schack",
             date: "2022-06-25",
             playerOneName: "Ida",
-            playerOneResult: "won",
+            playerOneResult: "lost",
             playerTwoName: "Anders",
             playerTwoResult: "won",
             id:1
@@ -38,7 +38,7 @@ const GameContextProvider = (props:any) => {
             playerOneName: "Ida",
             playerOneResult: "won",
             playerTwoName: "Anders",
-            playerTwoResult: "lost",
+            playerTwoResult: "won",
             id:4
         },{
             game: "Schack",

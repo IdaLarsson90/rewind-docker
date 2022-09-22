@@ -10,6 +10,7 @@ const FilterContextProvider = (props:any) => {
     const [gamesToShow, setGamesToShow] = useState<Games[]>(games)
     const [pickedPlayer, setPickedPlayer] = useState("all")
     const [pickedGame, setPickedGame] = useState("all")
+    const [winner, setWinner] = useState ("")
 
     const filterByPlayer = (event:any) =>{ //välj en spelare
         const query = event.target.value
@@ -71,15 +72,14 @@ const FilterContextProvider = (props:any) => {
         })
         setGamesToShow(gamesCopy)
         setPickedGame(query)
-        mostWins()
     }
 
-    function mostWins () {
+    useEffect(() => {
         let allWins = [];
-        let mf = 1;
-        let m = 0;
-        let item;
-        // console.log(gamesToShow)
+        let playerWins: Array = [];
+        let playerObj = {};
+        let playerExists = false;
+
         for (let wins of gamesToShow) {
             if (wins.playerOneResult === "won") {
                 allWins.push(wins)
@@ -87,41 +87,72 @@ const FilterContextProvider = (props:any) => {
                 allWins.push(wins)
             }
         }
-
-        for (let i = 0; i < allWins.length; i++) {
-            for (let j = i; j < allWins.length; j++) {
-              if(allWins[i] == allWins[j]){
-                m++
-              }
-              if (mf < m) {
-                mf = m;
-                item = allWins[i]
-                console.log(item.id)
-              }  
+        allWins.map((e) => {
+            if(e.playerOneResult === "won") {
+                if ( playerWins.length < 1) {
+                    playerObj = {
+                        name: e.playerOneName,
+                        wins: 1
+                    }
+                    playerWins.push(playerObj)
+                } else {
+                    for(let i = 0; i < playerWins.length; i++) {
+                        if(e.playerOneName == playerWins[i].name) {
+                            playerWins[i].wins = playerWins[i].wins + 1
+                            playerExists = true;
+                        }
+                    }
+                    if(!playerExists) {
+                        playerObj = {
+                            name: e.playerOneName,
+                            wins: 1
+                        }
+                        playerWins.push(playerObj)
+                    }
+                    playerExists = false;
+                }
             }
-            // m = 0
-            
-        }
-        
-        // console.log("all wins", item, mf)
+            if(e.playerTwoResult === "won") {
+                if ( playerWins.length < 1) {
+                    playerObj = {
+                        name: e.playerTwoName,
+                        wins: 1
+                    }
+                    playerWins.push(playerObj)
+                } else {
+                    for(let i = 0; i < playerWins.length; i++) {
+                        if(e.playerTwoName == playerWins[i].name) {
+                            playerWins[i].wins = playerWins[i].wins + 1
+                            playerExists = true;
+                        }
+                    } 
+                    if(!playerExists) {
+                        playerObj = {
+                            name: e.playerTwoName,
+                            wins: 1
+                        }
+                        playerWins.push(playerObj)
+                    }
+                    playerExists = false;
+                }
+            }
+        })
+     
+        let a = [playerWins[0]]
 
-        // let playerWin = {}
-        // let gamesWon = gamesToShow.filter((game) => {
-        //     gamesWon.map((el)=>{
-        //         console.log(el)
-        //         if(el === game.playerOneName && game.playerOneResult === "won") {
-                    
-        //             return
-        //         }
-        //     })
-        //     if (pickedGame === game.playerOneName && game.playerOneResult === "won") {
-        //         return game
-        //     } else if (pickedGame === game.playerTwoName && game.playerTwoResult === "won") {
-        //         return game
-        //     }
-        // })
-        // console.log(players)
-    }
+        playerWins.filter((i:object) => {
+            if (i.wins === a[0].wins && i.name !== a[0].name) {
+                a = [...a, i]
+            }
+             else if (i.wins > a[0].wins) {
+                a = []
+                a.push(i)
+            }
+        })
+            console.log(a)
+        setWinner(a)
+    }, [gamesToShow])
+    
     useEffect(() => {//sorterar alla matcher när sidan startas
     const gamesCopy = [...gamesToShow]
         gamesCopy.sort(( a, b ) => {
@@ -138,7 +169,7 @@ const FilterContextProvider = (props:any) => {
 
   
     return (
-        <FilterContext.Provider value={{filterByPlayer, filterByGame, gamesToShow, setGamesToShow, pickedPlayer, setPickedPlayer, pickedGame, setPickedGame}}>
+        <FilterContext.Provider value={{filterByPlayer, filterByGame, gamesToShow, setGamesToShow, pickedPlayer, setPickedPlayer, pickedGame, setPickedGame, winner}}>
             { props.children }
         </FilterContext.Provider>
     )
