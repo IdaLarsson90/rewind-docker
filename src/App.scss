@@ -4,9 +4,12 @@
 * {
     box-sizing: border-box;
 }
+body{
+    margin: 0;
+}
 
 .app {
-    max-width: 1000px;
+    
     margin: 0 auto;
 }
 
@@ -14,19 +17,34 @@
 
 h1, h2, h3 {
     font-family: 'Montserrat', sans-serif;
-    color: $orange-color;
+    color: $grey;
 }
 
-p {
+p, input[type=text], input[type=date], select, label{
     font-family: 'Hind', sans-serif;
-    color: $grey-color;
+    color: $grey;
 }
 
-button {
-    background-color: $orange-color;
-    cursor: pointer;
+
+
+/* CSS */
+.submit, button {
+    @include button;
+    // background-color: $yellow;
+    // border-radius: 12px;
+    // color: #000;
+    // cursor: pointer;
+    // font-weight: bold;
+    // padding: 10px 15px;
+    // text-align: center;
+    // transition: 200ms;
+    // box-sizing: border-box;
+    // border: none;
+    // font-size: 16px;
 }
 
-label {
-    text-align: start;
+button:hover, .submit:hover {
+  outline: 0;
+  background: $dark-yellow;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
 }

@@ -48,7 +48,7 @@ const EditGame = ( {}:Props) => {
                 <div>
                     <label htmlFor="game">Välj spel:</label>
                     <select onChange={handleChange} name="game" id="game" value={editFormData.game}>
-                        <option hidden={true} value="">Välj spel:</option>
+                        <option hidden={true} value="">Välj spel</option>
                         <option value="Schack">Schack</option>
                         <option value="Kalaha">Kalaha</option>
                         <option value="Memory">Memory</option>
@@ -62,32 +62,28 @@ const EditGame = ( {}:Props) => {
             </div>
             <div className="players">
                 <div>
-                    <h3>Spelare 1</h3>
-                    <label htmlFor="playerOneName">Namn</label>
-                    <input onChange={handleChange} value={editFormData.playerOneName} name="playerOneName" type="text" id="playerOneName" placeholder="För- och Efternamn" />
+                    <label htmlFor="playerOneName">Spelare 1</label>
+                    <input onChange={handleChange} value={editFormData.playerOneName} name="playerOneName" type="text" id="playerOneName" placeholder={gameToEdit.playerOneName} />
                     <label htmlFor="playerOneResult">Resultat</label>
                     <select onChange={handleChange} name="playerOneResult" id="playerOneResult" value={editFormData.playerOneResult}>
-                        <option hidden={true} value="">Välj resultat:</option>
+                        <option hidden={true} value="">Välj resultat</option>
                         <option value="lost">Förlorade</option>
                         <option value="won">Vann</option>
-                        <option value="draw">Oavgjort</option>
                     </select>
                 </div>
                 <div>
-                    <h3>Spelare 2</h3>
-                    <label htmlFor="playerTwoName">Namn</label>
-                    <input onChange={handleChange} value={editFormData.playerTwoName} name="playerTwoName" type="text" id="playerTwoName" placeholder="För- och Efternamn" />
+                    <label htmlFor="playerTwoName">Spelare 2</label>
+                    <input onChange={handleChange} value={editFormData.playerTwoName} name="playerTwoName" type="text" id="playerTwoName" placeholder={gameToEdit.playerTwoName} />
                     <label htmlFor="playerTwoResult">Resultat</label>
                     <select onChange={handleChange} name="playerTwoResult" id="playerTwoResult" value={editFormData.playerTwoResult}>
-                        <option hidden={true} value="">Välj resultat:</option>
+                        <option hidden={true} value="">Välj resultat</option>
                         <option value="lost">Förlorade</option>
                         <option value="won">Vann</option>
-                        <option value="draw">Oavgjort</option>
                     </select>
                 </div>
             </div>
             <div className="form-footer">
-                <input type="submit" id="button-green" value="Spara ändringar" />
+                <input className="submit" type="submit" id="button-green" value="Spara ändringar" />
             </div>
         </form>
     )

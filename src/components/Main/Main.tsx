@@ -21,6 +21,7 @@ const Main = () =>{
           }
         })
         setGameToEdit(pickedGameToEdit[0])
+        document.documentElement.scrollTop = 0;
     }
 
     return (
@@ -29,10 +30,10 @@ const Main = () =>{
               
                 <img className='hero__pic' src={chess} alt="" />
                 <section className='hero__container'>
-                  <p>Samla alla matchresultat på ett ställe och jämför med dina vänner</p>
+                  <GameForm />
               </section>
             </section>
-            <GameForm />
+            
             <FilterBar/>
             <GameList showEditForm={showEditForm}/>
          </main>

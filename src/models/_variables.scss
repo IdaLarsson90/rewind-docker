@@ -1,40 +1,30 @@
-$grey-color: #1f1f1f;
-$orange-color: #fbb807;
-$blue-color: #5e9fff;
+$grey: #1f1f1f;
+$yellow: #fbb807;
+$dark-yellow: #e7aa01;
 $green-color: #7eb780;
 $error-color: #dc3545;
 $success-color: #28a745;
 
-:root {
-  --fs-header: 54px;
-  --fs-logo: 34px;
-  --fs-a: 24px;
-  --fs-text: 20px;
-  --fs-small: 14px;
-}
+
 
 @mixin button-color {
-background-color: $blue-color;
-color: $white-color;
-border: 1px solid $blue-color;
+  background-color: $yellow;
+  color: $grey;
+  border: none;
 }
 
-%overlay {
-  display: flex;
-  justify-content: space-around;
-  padding: 1rem;
-  gap: 1rem;
-  width: 100%;
-}
+
 
 @mixin button {
-@include button-color;
-padding: 0.7rem;
-font-size: var(--fs-a);
-font-weight: 300;
-line-height: 29px;
-border-radius: 5px;
-cursor: pointer;
+  @include button-color;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
 @media screen and (max-width: 900px) {
