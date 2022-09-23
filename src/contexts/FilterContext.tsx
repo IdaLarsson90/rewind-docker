@@ -31,10 +31,10 @@ const FilterContextProvider = (props:any) => {
         const gamesCopy = [...filteredList] //sorterar spelarens matcher i kronologisk ordning
         gamesCopy.sort(( a, b ) => {
             if (a.date < b.date){
-            return 1;
+                return 1;
             }
             if (a.date > b.date){
-            return -1;
+                return -1;
             }
             return 0;
         })

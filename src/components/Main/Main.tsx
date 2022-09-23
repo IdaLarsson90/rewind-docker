@@ -1,3 +1,5 @@
+import './Main.scss'
+import chess from '../../assets/chess.avif'
 import { useContext } from 'react'
 import { FormContext } from '../../contexts/FormContext'
 import { FilterContext } from "../../contexts/FilterContext"
@@ -7,7 +9,7 @@ import FilterBar from '../../components/FilterBar'
 
 
 const Main = () =>{
-    const {editFormData, setSubmit, gameToEdit, setGameToEdit} = useContext(FormContext)
+    const {setSubmit, setGameToEdit} = useContext(FormContext)
     const { gamesToShow } = useContext(FilterContext)
     
     const showEditForm = (id) => {
@@ -20,14 +22,16 @@ const Main = () =>{
         })
         setGameToEdit(pickedGameToEdit[0])
     }
-//     const saveEdit = (e) =>{
-// e.prevent.default()
-//         console.log("Sparat ändring")
-//     }
-   
 
     return (
         <main>
+            <section className='hero'> 
+              
+                <img className='hero__pic' src={chess} alt="" />
+                <section className='hero__container'>
+                  <p>Samla alla matchresultat på ett ställe och jämför med dina vänner</p>
+              </section>
+            </section>
             <GameForm />
             <FilterBar/>
             <GameList showEditForm={showEditForm}/>

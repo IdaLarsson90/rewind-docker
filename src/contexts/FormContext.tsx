@@ -16,6 +16,7 @@ const FormContextProvider = (props:any) => {
         playerOneResult: "",
         playerTwoName: "",
         playerTwoResult: "",
+        id: 0
     })
 
     return (

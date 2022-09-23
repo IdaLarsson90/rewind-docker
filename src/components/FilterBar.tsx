@@ -36,6 +36,7 @@ const FilterBar = () => {
     }
     return(
         <section className="filterBar">
+            <h3>Filter</h3>
             <button type='button' onClick={handleClick} className ='toggleFilter'>{config ? "Välj spel" : "Välj spelare"}</button>
         
         {config ? (<PlayerDetails />) : (<GameDetails uniqueGames={uniqueGames}/>)}

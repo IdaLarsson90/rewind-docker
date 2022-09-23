@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;900&display=swap');
+
+@import "./models/variables";
+* {
+    box-sizing: border-box;
+}
+
+.app {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+// GENERIC STYLES
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: $orange-color;
+}
+
+p {
+    font-family: 'Hind', sans-serif;
+    color: $grey-color;
+}
+
+button {
+    background-color: $orange-color;
+    cursor: pointer;
+}
+
+label {
+    text-align: start;
+}

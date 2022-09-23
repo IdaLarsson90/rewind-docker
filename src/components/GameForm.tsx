@@ -1,3 +1,4 @@
+import './GameForm.scss'
 import { useState, useContext } from "react";
 import { FormState, Games } from "../models/data"
 import { GameContext } from "../contexts/GameContext"
@@ -19,7 +20,7 @@ const GameForm = () =>{
     
 
     return (
-        <div>
+        <div className="gameForm">
         {submit ? (<SubmitGame />):(<EditGame/>)}
         
         </div>
