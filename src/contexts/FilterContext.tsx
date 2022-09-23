@@ -74,6 +74,29 @@ const FilterContextProvider = (props:any) => {
         setPickedGame(query)
     }
 
+    function filterByNoWins(className) {
+        if (className === "noWinners") {
+            let noWinners = gamesToShow.filter((game) =>{
+                if(game.playerOneResult === "lost" && game.playerTwoResult === "lost") {
+                    return game;
+                }})
+            setGamesToShow(noWinners)
+        } else {
+            
+            const gamesCopy = [...games]
+            gamesCopy.sort(( a, b ) => {
+                if (a.date < b.date){
+                return 1;
+                }
+                if (a.date > b.date){
+                return -1;
+                }
+                return 0;
+            })
+            setGamesToShow(gamesCopy)
+        }
+    }
+
     useEffect(() => {
         let allWins = [];
         let playerWins: Array = [];
@@ -149,12 +172,11 @@ const FilterContextProvider = (props:any) => {
                 a.push(i)
             }
         })
-            console.log(a)
         setWinner(a)
     }, [gamesToShow])
     
     useEffect(() => {//sorterar alla matcher när sidan startas
-    const gamesCopy = [...gamesToShow]
+    const gamesCopy = [...games]
         gamesCopy.sort(( a, b ) => {
             if (a.date < b.date){
             return 1;
@@ -169,7 +191,7 @@ const FilterContextProvider = (props:any) => {
 
   
     return (
-        <FilterContext.Provider value={{filterByPlayer, filterByGame, gamesToShow, setGamesToShow, pickedPlayer, setPickedPlayer, pickedGame, setPickedGame, winner}}>
+        <FilterContext.Provider value={{filterByPlayer, filterByGame, gamesToShow, setGamesToShow, pickedPlayer, setPickedPlayer, pickedGame, setPickedGame, winner, filterByNoWins}}>
             { props.children }
         </FilterContext.Provider>
     )

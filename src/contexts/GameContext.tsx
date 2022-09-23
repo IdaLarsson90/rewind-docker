@@ -5,8 +5,6 @@ import { Games } from "../models/data";
 export const GameContext = createContext<any | null>(null);
 
 const GameContextProvider = (props:any) => {
-    // const { sortByDate } = useContext(FilterContext)
-
     const [games, setGames] = useState<Games[]>([
         {
             game: "Schack",
@@ -44,7 +42,7 @@ const GameContextProvider = (props:any) => {
             game: "Schack",
             date: "2022-06-25",
             playerOneName: "Ida",
-            playerOneResult: "won",
+            playerOneResult: "lost",
             playerTwoName: "Anders",
             playerTwoResult: "lost",
             id:5
@@ -158,9 +156,7 @@ const GameContextProvider = (props:any) => {
             id:0
         })
     };
-    const removeGame = (id:number) =>{
-        setGames(games.filter(game => game.id !== id));
-    }
+   
 
     useEffect(() => {
       localStorage.setItem('games', JSON.stringify(games))
@@ -169,7 +165,7 @@ const GameContextProvider = (props:any) => {
     
 
     return (
-        <GameContext.Provider value={{games, addGame, removeGame}}>
+        <GameContext.Provider value={{games, addGame, setGames}}>
             { props.children }
         </GameContext.Provider>
     )

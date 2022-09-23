@@ -12,11 +12,6 @@ const GameDetails = ({uniqueGames}: Props) => {
     const { players, setPlayers }= useContext(PlayerContext)
     const { filterByGame, pickedGame, gamesToShow, winner } = useContext(FilterContext)
     
- 
-   
-
-    
-    
     return(
         <div>
           <select onChange={filterByGame} name="name" id="name" >
@@ -28,7 +23,13 @@ const GameDetails = ({uniqueGames}: Props) => {
           </select>
           {
             pickedGame !=="all" ? (
-                <p> {winner.map((e)=>  {return <span>  e.namn </span>})} har vunnit flest antal gånger i {pickedGame} någonsin</p>
+                <p> {winner.map((e, i)=>{
+                    if(i + 1 === winner.length) {
+                        return <span> {e.name} </span>
+                    } else {
+                        return <span> {e.name} och </span>
+                    }
+                })} har vunnit flest antal gånger i {pickedGame} någonsin</p>
             ) : ( <></>)
             } 
         </div> 
