@@ -1,0 +1,39 @@
+.hero {
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    max-width: 1200px;
+    .hero__container{
+        background-color: rgba($color: #FFF, $alpha: 0.7);
+        position: absolute;
+        z-index: 2;
+        top: 25%;
+        left: 5%;
+        width: 50%;
+        max-width:800px;
+        padding: 2rem;
+        border-radius: 10px;
+    }
+    .hero__pic {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 5px;
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+    .hero__pic {
+        width: 100vw;
+    }
+  
+  }
+  @media screen and (max-width: 730px) {
+      .hero__container {
+          display: none;
+      }
+      .hero__pic {
+          display: none;
+      }
+  }
+  

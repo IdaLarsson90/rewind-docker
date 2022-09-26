@@ -1,3 +1,4 @@
+import './GameList.scss'
 import { useContext, useState, useEffect } from "react"
 import { FilterContext } from "../contexts/FilterContext"
 import { GameContext } from "../contexts/GameContext"
@@ -30,26 +31,17 @@ const GameList = ({showEditForm}: Props) => {
   }, [games])
 
     return (
-    <div className="gamesList">
-      <table>
-        <tbody>
-        <tr>
-          <th>Spel</th>
-          <th>Datum</th>
-          <th>Spelare 1</th>
-          <th>Resultat</th>
-          <th>Spelare 2</th>
-          <th>Resultat</th>
-        </tr>
-        
+    <div className="gameList">
+      <section className="table">
+               
         {
           gamesToShow.map((game:Games)=>{
           return ( <GameListItem game={game} key={game.id} showEditForm={showEditForm}/> )})
         }
        
         
-        </tbody>
-      </table>
+        
+      </section>
     </div>
   )
 }

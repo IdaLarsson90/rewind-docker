@@ -1,3 +1,5 @@
+import './GameDetails.scss'
+
 import { useContext, useState, useEffect } from "react"
 import { GameContext } from "../contexts/GameContext"
 import { PlayerContext } from "../contexts/PlayerContext"
@@ -13,7 +15,7 @@ const GameDetails = ({uniqueGames}: Props) => {
     const { filterByGame, pickedGame, gamesToShow, winner } = useContext(FilterContext)
     
     return(
-        <div>
+        <div className="gameDetails">
           <select onChange={filterByGame} name="name" id="name" >
           <option value="all">Visa alla spel:</option>
           {
@@ -21,16 +23,22 @@ const GameDetails = ({uniqueGames}: Props) => {
             <option value={game} key={game}>{game}</option>)
           }
           </select>
-          {
+            {
             pickedGame !=="all" ? (
-                <p> {winner.map((e, i)=>{
-                    if(i + 1 === winner.length) {
+                
+                <p className='gameInfo'> {winner.map((e, i)=>{
+                    console.log(pickedGame)
+                   
+                    if(i + 1 === winner.length || winner.length === 0) {
                         return <span> {e.name} </span>
-                    } else {
+                    } 
+                    else {
                         return <span> {e.name} och </span>
                     }
+                    
                 })} har vunnit flest antal gånger i {pickedGame} någonsin</p>
-            ) : ( <></>)
+            ) 
+            : ( <></>)
             } 
         </div> 
     )

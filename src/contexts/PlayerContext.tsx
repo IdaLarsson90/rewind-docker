@@ -5,10 +5,9 @@ import { Players } from "../models/data";
 export const PlayerContext = createContext<any | null>(null);
 
 const PlayerContextProvider = (props:any) => {
+    const [gamesWon, setGamesWon] = useState([])
     const { games } = useContext(GameContext)
-    const [players, setPlayers] = useState<Players[]>([
-      
-    ])
+    const [players, setPlayers] = useState<Players[]>([])
 
     
     useEffect(() => {
@@ -20,7 +19,7 @@ const PlayerContextProvider = (props:any) => {
     }, [games])
 
     return (
-        <PlayerContext.Provider value={{players, setPlayers}}>
+        <PlayerContext.Provider value={{players, setPlayers, setGamesWon, gamesWon}}>
             { props.children }
         </PlayerContext.Provider>
     )

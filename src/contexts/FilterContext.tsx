@@ -10,7 +10,9 @@ const FilterContextProvider = (props:any) => {
     const [gamesToShow, setGamesToShow] = useState<Games[]>(games)
     const [pickedPlayer, setPickedPlayer] = useState("all")
     const [pickedGame, setPickedGame] = useState("all")
-    const [winner, setWinner] = useState ("")
+    const [winner, setWinner] = useState ([{
+        name: "", wins: 0
+    }])
 
     const filterByPlayer = (event:any) =>{ //välj en spelare
         const query = event.target.value
@@ -18,8 +20,7 @@ const FilterContextProvider = (props:any) => {
         if (query === "all") {
             filteredList = games.filter((game) => { 
             if (query === "all") {
-                console.log("Alla valda")
-                    return game
+                  return game
                 }
             })
         } else {
@@ -76,8 +77,8 @@ const FilterContextProvider = (props:any) => {
 
     function filterByNoWins(className) {
         if (className === "noWinners") {
-            let noWinners = gamesToShow.filter((game) =>{
-                if(game.playerOneResult === "lost" && game.playerTwoResult === "lost") {
+            let noWinners = games.filter((game) =>{
+                if(game.playerOneResult === "loss" && game.playerTwoResult === "loss") {
                     return game;
                 }})
             setGamesToShow(noWinners)
@@ -104,14 +105,14 @@ const FilterContextProvider = (props:any) => {
         let playerExists = false;
 
         for (let wins of gamesToShow) {
-            if (wins.playerOneResult === "won") {
+            if (wins.playerOneResult === "win") {
                 allWins.push(wins)
-            } else if (wins.playerTwoResult === "won"){
+            } else if (wins.playerTwoResult === "win"){
                 allWins.push(wins)
             }
         }
         allWins.map((e) => {
-            if(e.playerOneResult === "won") {
+            if(e.playerOneResult === "win") {
                 if ( playerWins.length < 1) {
                     playerObj = {
                         name: e.playerOneName,
@@ -135,7 +136,7 @@ const FilterContextProvider = (props:any) => {
                     playerExists = false;
                 }
             }
-            if(e.playerTwoResult === "won") {
+            if(e.playerTwoResult === "win") {
                 if ( playerWins.length < 1) {
                     playerObj = {
                         name: e.playerTwoName,
@@ -172,7 +173,17 @@ const FilterContextProvider = (props:any) => {
                 a.push(i)
             }
         })
-        setWinner(a)
+        console.log('a', a)
+        console.log('a length', a.length)
+        if (a[0] === undefined) {
+            // setGamesToShow(games)
+            setWinner([{name: "Ingen", wins: 0}])
+            setPickedGame("all")
+        } else {
+            setWinner(a)
+        }
+    
+       
     }, [gamesToShow])
     
     useEffect(() => {//sorterar alla matcher när sidan startas

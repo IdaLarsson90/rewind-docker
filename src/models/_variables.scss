@@ -1,37 +1,31 @@
-$grey: #1f1f1f;
+$grey: #858484;
+$light-grey: #eee;
+$dark-grey:#1f1f1f;
 $yellow: #fbb807;
+$light-yellow: #faeecf;
 $dark-yellow: #e7aa01;
-$green-color: #7eb780;
-$error-color: #dc3545;
-$success-color: #28a745;
-
-
-
-@mixin button-color {
-  background-color: $yellow;
-  color: $grey;
-  border: none;
-}
-
-
+$dark-red: #d63343;
 
 @mixin button {
-  @include button-color;
   border-radius: 12px;
   cursor: pointer;
-  font-weight: bold;
-  padding: 10px 15px;
-  text-align: center;
+  border: none;
   transition: 200ms;
-  box-sizing: border-box;
-  font-size: 16px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: $dark-grey;
+  img {
+    height: 1rem;
+  }
+}
+@mixin primary-button {
+  @include button;
+  background-color: $yellow;
 }
 
-@media screen and (max-width: 900px) {
-  :root {
-    --fs-header: 40px;
-    --fs-logo: 24px;
-    --fs-a: 16px;
-    --fs-text: 15px;
-  }
+@mixin secondary-button {
+  @include button;
+  background-color: $light-grey;
 }

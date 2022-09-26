@@ -1,12 +1,10 @@
 import './Main.scss'
-import chess from '../../assets/chess.avif'
 import { useContext } from 'react'
 import { FormContext } from '../../contexts/FormContext'
 import { FilterContext } from "../../contexts/FilterContext"
 import GameForm from '../../components/GameForm'
 import GameList from '../../components/GameList'
 import FilterBar from '../../components/FilterBar'
-
 
 const Main = () =>{
     const {setSubmit, setGameToEdit} = useContext(FormContext)
@@ -25,18 +23,11 @@ const Main = () =>{
     }
 
     return (
-        <main>
-            <section className='hero'> 
-              
-                <img className='hero__pic' src={chess} alt="" />
-                <section className='hero__container'>
-                  <GameForm />
-              </section>
-            </section>
-            
-            <FilterBar/>
-            <GameList showEditForm={showEditForm}/>
-         </main>
+      <main>
+        <GameForm />
+        <FilterBar/>
+        <GameList showEditForm={showEditForm}/>
+      </main>
     )
 }
 

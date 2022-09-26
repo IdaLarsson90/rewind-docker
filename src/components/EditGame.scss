@@ -1,0 +1,15 @@
+@import "../models/variables";
+
+.form--edit {
+    border: 1px solid $dark-grey;
+    padding: 0.5rem;
+}
+
+.remove {
+    background-color: $light-grey;
+    padding: 0.2rem 0.7rem;
+    margin-left: 0.5rem;
+}
+.remove:hover{
+    background-color: $dark-red;
+}

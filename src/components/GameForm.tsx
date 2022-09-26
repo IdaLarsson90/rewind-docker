@@ -20,7 +20,7 @@ const GameForm = () =>{
     
 
     return (
-        <div className="gameForm">
+        <div className="box">
         {submit ? (<SubmitGame />):(<EditGame/>)}
         
         </div>

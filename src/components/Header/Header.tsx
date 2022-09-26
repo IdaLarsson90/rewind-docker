@@ -5,8 +5,10 @@ const Header = () =>{
 
     return (
         <header>
-            <img src={puzzle} alt="" />
-            <h1>Rewind - resultatkollen</h1>
+            <div>
+                <img src={puzzle} alt="" />
+                <h1>Rewind</h1>
+            </div>
         </header>
     )
 }

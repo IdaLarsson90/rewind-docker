@@ -1,9 +1,24 @@
+@import "../../models/variables";
+
 header {
-    display: flex;
-    align-items: center;
-    padding-left: 1rem;
-    // background-color: #1f1f1f;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+	grid-auto-rows: auto;
+    grid-template-areas: " . logo . . . . ";
+    
+    // padding-left: 1rem;
+    background-color: #1f1f1f;
+    width: 100vw;
+
+    div {
+        grid-area: logo;
+        display: flex;
+    
+    }
     img {
         height: 70px;
+    }
+    h1 {
+        color: $yellow
     }
 }

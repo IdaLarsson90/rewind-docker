@@ -1,0 +1,45 @@
+@import "../models/variables";
+.filterBar {
+    grid-area: filter;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.7rem;
+    // align-items: center;
+    // justify-content: flex-end;
+    margin: 0;
+    background-color: #fff;
+
+    button {
+        background-color: $light-grey;
+        border-radius: 5px;
+        padding: 0.7rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        line-height: 0px;
+        font-size: 0.75rem;
+        font-weight: 400;
+        border: 0.5px solid $grey;
+        color: $dark-grey;
+        &:hover {
+            background-color: $grey;
+        }
+    }
+    .active {
+        background-color: $grey;
+        color: $light-grey;
+    }
+
+ 
+        select {
+            padding: 0;
+            margin: 0;
+        }
+        .filterButtons {
+            display: flex;
+            flex-direction: column;
+            // justify-content: space-around;
+            // margin: 0;
+        }
+    
+}

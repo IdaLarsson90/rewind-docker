@@ -1,3 +1,4 @@
+import './EditGame.scss'
 import { useContext } from "react";
 import { GameContext } from "../contexts/GameContext"
 import {FormContext} from "../contexts/FormContext"
@@ -8,7 +9,7 @@ interface Props {
 
 const EditGame = ( {}:Props) => {
     const { games, setGames } = useContext(GameContext)
-    const { editFormData, setEditFormData, gameToEdit} = useContext(FormContext)
+    const { editFormData, setEditFormData, gameToEdit, setSubmit} = useContext(FormContext)
 
     const saveEdit = (event:any) => {
         event.preventDefault();
@@ -35,6 +36,7 @@ const EditGame = ( {}:Props) => {
                 return 0;
             })
             setGames(gamesCopy) 
+            setSubmit(true)
         } 
     }
 
@@ -42,12 +44,13 @@ const EditGame = ( {}:Props) => {
         setEditFormData({ ...editFormData, [event.target.name]: event.target.value });
     }
     return(
-        <form className="form" onSubmit={saveEdit}>
-            <h2>Ändra ett spel</h2>
+        <form className="form form--edit" onSubmit={saveEdit}>
+            
+          <h2>Ändra ett spel</h2>
+            
             <div>
                 <div>
-                    <label htmlFor="game">Välj spel:</label>
-                    <select onChange={handleChange} name="game" id="game" value={editFormData.game}>
+                    <select onChange={handleChange} name="game" id="game" value={editFormData.game} required>
                         <option hidden={true} value="">Välj spel</option>
                         <option value="Schack">Schack</option>
                         <option value="Kalaha">Kalaha</option>
@@ -56,34 +59,30 @@ const EditGame = ( {}:Props) => {
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="date">Datum</label>
-                    <input type="date" id="date" name="date" onChange={handleChange}></input>
+                    <input type="date" id="date" name="date" onChange={handleChange} required></input>
                 </div>
             </div>
             <div className="players">
                 <div>
-                    <label htmlFor="playerOneName">Spelare 1</label>
-                    <input onChange={handleChange} value={editFormData.playerOneName} name="playerOneName" type="text" id="playerOneName" placeholder={gameToEdit.playerOneName} />
-                    <label htmlFor="playerOneResult">Resultat</label>
-                    <select onChange={handleChange} name="playerOneResult" id="playerOneResult" value={editFormData.playerOneResult}>
+                    <input onChange={handleChange} value={editFormData.playerOneName} name="playerOneName" type="text" id="playerOneName" placeholder="Spelare 1" required/>
+                    <select onChange={handleChange} name="playerOneResult" id="playerOneResult" value={editFormData.playerOneResult} required>
                         <option hidden={true} value="">Välj resultat</option>
-                        <option value="lost">Förlorade</option>
-                        <option value="won">Vann</option>
+                        <option value="loss">Förlorade</option>
+                        <option value="win">Vann</option>
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="playerTwoName">Spelare 2</label>
-                    <input onChange={handleChange} value={editFormData.playerTwoName} name="playerTwoName" type="text" id="playerTwoName" placeholder={gameToEdit.playerTwoName} />
-                    <label htmlFor="playerTwoResult">Resultat</label>
-                    <select onChange={handleChange} name="playerTwoResult" id="playerTwoResult" value={editFormData.playerTwoResult}>
+                    <input onChange={handleChange} value={editFormData.playerTwoName} name="playerTwoName" type="text" id="playerTwoName" placeholder="spelare 2" required/>
+                    <select onChange={handleChange} name="playerTwoResult" id="playerTwoResult" value={editFormData.playerTwoResult} required >
                         <option hidden={true} value="">Välj resultat</option>
-                        <option value="lost">Förlorade</option>
-                        <option value="won">Vann</option>
+                        <option value="loss">Förlorade</option>
+                        <option value="win">Vann</option>
                     </select>
                 </div>
             </div>
             <div className="form-footer">
-                <input className="submit" type="submit" id="button-green" value="Spara ändringar" />
+                <input className="primary-button" type="submit" id="button-green" value="Spara ändringar" />
+                <button className='secondary-button' onClick={()=>setSubmit(true)}>Stäng</button>
             </div>
         </form>
     )

@@ -1,3 +1,4 @@
+import './FilterBar.scss'
 import { useContext, useState, useEffect } from "react"
 import { GameContext } from "../contexts/GameContext"
 import PlayerDetails from "./PlayerDetails"
@@ -11,7 +12,9 @@ const FilterBar = () => {
     const { games } = useContext(GameContext)
     const { setGamesToShow, setPickedPlayer, filterByNoWins } = useContext(FilterContext)
     const [uniqueGames, setUniqueGames] = useState([])
-  
+    // const [resetActive, setResetActive] = useState(true)
+    // const [noWinnersActive, setNoWinnersActive] = useState(false)
+    // const active = " "
     useEffect(() => {
       // console.log(games)
       const allGames = games.map( game => game.game)
@@ -22,11 +25,10 @@ const FilterBar = () => {
 
     function handleClick(e:any){
         let className = e.target.className;
-
+        console.log(className)
         if (className ==="toggleFilter") {
             setConfig(!config)
         } else if (className ==="noWinners") {
-           
             filterByNoWins(className)
         }
         else if(className === "reset") {
@@ -36,13 +38,18 @@ const FilterBar = () => {
     }
     return(
         <section className="filterBar">
-            <h3>Filter</h3>
-            <button type='button' onClick={handleClick} className ='toggleFilter'>{config ? "Välj spel" : "Välj spelare"}</button>
-        
-        {config ? (<PlayerDetails />) : (<GameDetails uniqueGames={uniqueGames}/>)}
-        
-        <button type='button' onClick={handleClick} className ='noWinners'>{"Visa alla spel utan en vinnare"}</button>
-        <button type='button' onClick={handleClick} className ='reset'>{ "Visa alla spel"}</button>
+            {/* <h3>Filtrera</h3> */}
+            
+            <div className="filterButtons">
+                <button type='button' onClick={handleClick} className ={`noWinners`}>{"Visa spel utan en vinnare"}</button>
+                
+                <button type='button' onClick={handleClick} className ='toggleFilter'>{config ? "Välj spel" : "Välj spelare"}</button>
+                
+                <button type='button' onClick={handleClick} className ={`reset`}>{ "Visa alla"}</button>
+            </div>
+            {
+            config ? (<PlayerDetails />) : (<GameDetails uniqueGames={uniqueGames}/>)}
+          
         </section>
     )
 }

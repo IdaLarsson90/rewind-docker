@@ -1,50 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;900&family=Share+Tech+Mono&display=swap');
 
 @import "./models/variables";
 * {
     box-sizing: border-box;
 }
 body{
-    margin: 0;
+    margin: 0 auto;
+    background-color: $light-grey;
+    overflow-x: hidden;
 }
 
 .app {
-    
     margin: 0 auto;
 }
 
 // GENERIC STYLES
 
-h1, h2, h3 {
-    font-family: 'Montserrat', sans-serif;
-    color: $grey;
+h1, h2, h3, .primary-button {
+    font-family: 'Share Tech Mono', monospace;
+    color: $dark-grey;
 }
 
-p, input[type=text], input[type=date], select, label{
+p, input[type=text], input[type=date], select, label, td, .secondary-button{
     font-family: 'Hind', sans-serif;
-    color: $grey;
+    color: $dark-grey;
 }
 
 
-
-/* CSS */
-.submit, button {
-    @include button;
-    // background-color: $yellow;
-    // border-radius: 12px;
-    // color: #000;
-    // cursor: pointer;
-    // font-weight: bold;
-    // padding: 10px 15px;
-    // text-align: center;
-    // transition: 200ms;
-    // box-sizing: border-box;
-    // border: none;
-    // font-size: 16px;
+.primary-button {
+    @include primary-button;
 }
 
-button:hover, .submit:hover {
+.primary-button:hover {
   outline: 0;
   background: $dark-yellow;
   box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
 }
+
+.secondary-button {
+    @include secondary-button;
+}
+.secondary-button:hover {
+    outline: 0;
+    background: $dark-red;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+  }

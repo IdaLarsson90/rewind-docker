@@ -35,22 +35,32 @@ const GameListItem = ({game, showEditForm} :Props) => {
         setGamesToShow(gamesCopy)
     }
     return(
-        <tr>
-            <td>{game.game}</td>
-            <td>{game.date}</td>
-            <td>{game.playerOneName}</td>
-            <td>{game.playerOneResult}</td>
-            <td>{game.playerTwoName}</td>
-            <td>{game.playerTwoResult}</td>
-            <td><button onClick={()=>removeGame(game.id)}>
-                <img src={bin}/>
-                Radera</button>
-            </td>
-            <td><button onClick={()=> showEditForm(game.id)}>
-                <img src={pen}/>
-                Redigera</button>
-            </td>
-        </tr>
+        <div className="tr">
+            <p className="td">{game.game}</p>
+            <p className="td">{game.date}</p>
+
+            <div>
+                <p className="td">{game.playerOneName}</p>
+                <p className="td"> - </p>
+                <p className="td">{game.playerTwoName}</p>
+            </div>
+            
+            <div>
+                <p className="td">{game.playerOneResult}</p>
+                <p className="td"> - </p>
+                <p className="td">{game.playerTwoResult}</p>
+            </div>
+
+            <p className="buttons td">
+                <button className="primary-button" onClick={()=> showEditForm(game.id)}>
+                    <img src={pen}/>
+                   <p> Ändra </p></button>
+                <button className="secondary-button" onClick={()=>removeGame(game.id)}>
+                    <img src={bin}/>
+                </button>
+            
+            </p>
+        </div>
     )
 }
 export default GameListItem
