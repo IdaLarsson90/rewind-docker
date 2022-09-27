@@ -1,30 +1,45 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import { GameContext } from "./GameContext"
-import { Games } from "../models/data"
+// import { GameContext } from "./GameContext"
+import { Game } from "../models/data"
+import { useGameStore } from "../store/gameStore";
 
-export const FilterContext = createContext<any | null>(null);
+export type FilterContext = {
+    filterByPlayer: () => void, 
+    filterByGame: ()=> void, 
+    gamesToShow: Game[], 
+    setGamesToShow: (games:Game[]) => void, 
+    pickedPlayer:string, 
+    setPickedPlayer: (pickedPlayer:string) => void, 
+    pickedGame: string, 
+    setPickedGame: (pickedGame:string) => void, 
+    winner: object, 
+    filterByNoWins: (winner:object) => void
+}
+
+export const FilterContext = createContext<FilterContext | null>(null);
 
 const FilterContextProvider = (props:any) => {
-    const { games } = useContext(GameContext)
+    // const { games} = useContext(GameContext)
+    const games = useGameStore((state) => state.games)
 
-    const [gamesToShow, setGamesToShow] = useState<Games[]>(games)
+    const [gamesToShow, setGamesToShow] = useState<Game[]>(games)
     const [pickedPlayer, setPickedPlayer] = useState("all")
     const [pickedGame, setPickedGame] = useState("all")
     const [winner, setWinner] = useState ([{
         name: "", wins: 0
     }])
 
-    const filterByPlayer = (event:any) =>{ //välj en spelare
+    const filterByPlayer = (event:React.ChangeEvent<HTMLInputElement>) =>{ //välj en spelare
         const query = event.target.value
         let filteredList;
         if (query === "all") {
-            filteredList = games.filter((game) => { 
+            filteredList = games.filter((game:Games) => { 
             if (query === "all") {
                   return game
                 }
             })
         } else {
-            filteredList = games.filter((game) => { 
+            filteredList = games.filter((game:Games) => { 
             if(game.playerTwoName === query || game.playerOneName === query) {
                 return game
             }})
@@ -41,7 +56,6 @@ const FilterContextProvider = (props:any) => {
         })
         setGamesToShow(gamesCopy)
         setPickedPlayer(query)
-       
     }
     const filterByGame = (event:any) =>{
         const query = event.target.value
@@ -173,8 +187,7 @@ const FilterContextProvider = (props:any) => {
                 a.push(i)
             }
         })
-        console.log('a', a)
-        console.log('a length', a.length)
+
         if (a[0] === undefined) {
             // setGamesToShow(games)
             setWinner([{name: "Ingen", wins: 0}])

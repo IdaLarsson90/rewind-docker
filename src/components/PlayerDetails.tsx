@@ -1,14 +1,12 @@
 import './PlayerDetails.scss'
-import { useContext, useState } from "react"
-// import InfoBox from './InfoBox'
+import { useContext } from "react"
+import { usePlayerStore } from "../store/playerStore";
 
-import { PlayerContext } from "../contexts/PlayerContext"
 import { FilterContext } from "../contexts/FilterContext"
-// import InfoBox from './InfoBox'
-
 
 const PlayerDetails = () => {
-    const { players }= useContext(PlayerContext)
+
+    const players = usePlayerStore((state) => state.players)
     const { gamesToShow, filterByPlayer, pickedPlayer } = useContext(FilterContext)
     
     let gamesWon = [];

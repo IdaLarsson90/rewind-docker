@@ -1,13 +1,8 @@
-import { useState, useContext } from "react";
-import { FormState, Games } from "../models/data"
-import { GameContext } from "../contexts/GameContext"
-import { PlayerContext } from "../contexts/PlayerContext"
-import {FormContext} from "../contexts/FormContext"
+import { useState } from "react";
+import { FormState } from "../models/data"
+import { useGameStore } from "../store/gameStore";
 
 const SubmitGame = () =>{
-    const { players, setPlayers }= useContext(PlayerContext)
-    const { addGame, games } = useContext(GameContext)
-    const {submit, setSubmit} = useContext(FormContext)
     const [formData, setFormData] = useState<FormState>({
         game: "",
         date: "",
@@ -15,18 +10,38 @@ const SubmitGame = () =>{
         playerOneResult: "",
         playerTwoName: "",
         playerTwoResult: "",
+        id:0
     })
+    const games = useGameStore((state) => state.games)
+    const setGames = useGameStore((state) => state.setGames)
 
-
+    const addGame = (formData:any, setFormData:any) => { 
+        setGames([ ...games, { //Lägger till nytt spel i listan
+            game: formData.game, 
+            date: formData.date,
+            playerOneName: formData.playerOneName,
+            playerOneResult: formData.playerOneResult,
+            playerTwoName: formData.playerTwoName,
+            playerTwoResult: formData.playerTwoResult,
+            id: (games.length + 1)
+        }])
+        setFormData({ //Tömmer inputfält efter klick
+            game: "",
+            date: "",
+            playerOneName: "",
+            playerOneResult: "",
+            playerTwoName: "",
+            playerTwoResult: "",
+            id:0
+        })
+    };
     const handleSubmit = (event:any) => {
         event.preventDefault();
         addGame(formData, setFormData);
     }
 
-  
     const handleChange = (event: any) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
-        
     }
     
     return (

@@ -1,8 +1,5 @@
 import './GameDetails.scss'
-
-import { useContext, useState, useEffect } from "react"
-import { GameContext } from "../contexts/GameContext"
-import { PlayerContext } from "../contexts/PlayerContext"
+import { useContext } from "react"
 import { FilterContext } from "../contexts/FilterContext"
 
 interface Props{
@@ -10,8 +7,7 @@ interface Props{
 }
 
 const GameDetails = ({uniqueGames}: Props) => {
-    const { games } = useContext(GameContext)
-    const { players, setPlayers }= useContext(PlayerContext)
+
     const { filterByGame, pickedGame, gamesToShow, winner } = useContext(FilterContext)
     
     return(
@@ -25,20 +21,15 @@ const GameDetails = ({uniqueGames}: Props) => {
           </select>
             {
             pickedGame !=="all" ? (
-                
                 <p className='gameInfo'> {winner.map((e, i)=>{
-                    console.log(pickedGame)
-                   
                     if(i + 1 === winner.length || winner.length === 0) {
                         return <span> {e.name} </span>
                     } 
                     else {
                         return <span> {e.name} och </span>
                     }
-                    
                 })} har vunnit flest antal gånger i {pickedGame} någonsin</p>
-            ) 
-            : ( <></>)
+            ) : ( <></>)
             } 
         </div> 
     )

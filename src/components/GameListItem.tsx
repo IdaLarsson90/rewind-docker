@@ -9,15 +9,16 @@ import { FormContext } from "../contexts/FormContext"
 
 interface Props{
     game: Games,
-    showEditForm:any
+    showEditForm:any,
+ 
 }
 
 
 const GameListItem = ({game, showEditForm} :Props) => {
-    const {games, setGames} = useContext(GameContext)
+    // const {games, setGames} = useContext(GameContext)
     const { gamesToShow, setGamesToShow } = useContext(FilterContext)
     // const { handleEdit }= useContext(FormContext)
-    
+
     function removeGame (id:number){
         console.log("remove", id)
         const newList = gamesToShow.filter(game => game.id !== id)
@@ -34,6 +35,8 @@ const GameListItem = ({game, showEditForm} :Props) => {
         })
         setGamesToShow(gamesCopy)
     }
+
+    
     return(
         <div className="tr">
             <p className="td">{game.game}</p>

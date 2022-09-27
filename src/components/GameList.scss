@@ -66,6 +66,10 @@
             display: block;
             // transition: 200ms;
         }
+        .primary-button:focus p{
+            display: block;
+           font-weight: 500;
+        }
         .remove {
             background-color: $light-grey;
             padding: 0.2rem 0.7rem;

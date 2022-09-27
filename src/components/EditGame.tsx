@@ -1,17 +1,17 @@
 import './EditGame.scss'
 import { useContext } from "react";
-import { GameContext } from "../contexts/GameContext"
+// import { GameContext } from "../contexts/GameContext"
 import {FormContext} from "../contexts/FormContext"
+// import { GameContextType } from '../models/data';
+import { useGameStore } from "../store/gameStore";
 
-interface Props {
-    saveEdit:any
-}
+const EditGame = () => {
+    const games = useGameStore((state) => state.games)
+    const setGames = useGameStore((state) => state.setGames)
+    // const { games, setGames } = useContext<GameContextType>(GameContext)
+    const { editFormData, setEditFormData, gameToEdit, setSubmit, activeEdit, setActiveEdit} = useContext(FormContext)
 
-const EditGame = ( {}:Props) => {
-    const { games, setGames } = useContext(GameContext)
-    const { editFormData, setEditFormData, gameToEdit, setSubmit} = useContext(FormContext)
-
-    const saveEdit = (event:any) => {
+    const saveEdit = (event:React.FormEvent<HTMLInputElement>) => {
         event.preventDefault();
 
         if (games.find(e => e.id === gameToEdit.id)){
@@ -37,9 +37,9 @@ const EditGame = ( {}:Props) => {
             })
             setGames(gamesCopy) 
             setSubmit(true)
+            setActiveEdit(false)
         } 
     }
-
     const handleChange = (event: any) => {
         setEditFormData({ ...editFormData, [event.target.name]: event.target.value });
     }
@@ -72,7 +72,7 @@ const EditGame = ( {}:Props) => {
                     </select>
                 </div>
                 <div>
-                    <input onChange={handleChange} value={editFormData.playerTwoName} name="playerTwoName" type="text" id="playerTwoName" placeholder="spelare 2" required/>
+                    <input onChange={handleChange} value={editFormData.playerTwoName} name="playerTwoName" type="text" id="playerTwoName" placeholder="Spelare 2" required/>
                     <select onChange={handleChange} name="playerTwoResult" id="playerTwoResult" value={editFormData.playerTwoResult} required >
                         <option hidden={true} value="">Välj resultat</option>
                         <option value="loss">Förlorade</option>
@@ -82,7 +82,7 @@ const EditGame = ( {}:Props) => {
             </div>
             <div className="form-footer">
                 <input className="primary-button" type="submit" id="button-green" value="Spara ändringar" />
-                <button className='secondary-button' onClick={()=>setSubmit(true)}>Stäng</button>
+                <button className='secondary-button' onClick={()=>{setSubmit(true); setActiveEdit(false)}}>Stäng</button>
             </div>
         </form>
     )

@@ -1,22 +1,18 @@
 import './FilterBar.scss'
 import { useContext, useState, useEffect } from "react"
-import { GameContext } from "../contexts/GameContext"
 import PlayerDetails from "./PlayerDetails"
 import GameDetails from "./GameDetails"
 import { FilterContext } from "../contexts/FilterContext"
-
+import { useGameStore } from "../store/gameStore";
 
 const FilterBar = () => {
     const [config, setConfig] = useState<boolean>(false);
     const [configNoWins, setConfigNoWins] = useState<boolean>(false);
-    const { games } = useContext(GameContext)
-    const { setGamesToShow, setPickedPlayer, filterByNoWins } = useContext(FilterContext)
+    const games = useGameStore((state) => state.games)
+    const { setPickedPlayer, filterByNoWins } = useContext(FilterContext)
     const [uniqueGames, setUniqueGames] = useState([])
-    // const [resetActive, setResetActive] = useState(true)
-    // const [noWinnersActive, setNoWinnersActive] = useState(false)
-    // const active = " "
     useEffect(() => {
-      // console.log(games)
+      
       const allGames = games.map( game => game.game)
       const uniqueGamesList = [...new Set(allGames)]
       setUniqueGames(uniqueGamesList)
