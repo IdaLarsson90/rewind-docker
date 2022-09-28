@@ -41,12 +41,10 @@ const FilterBar = () => {
            if (className === "noWinners") {
             let noWinners = games.filter((game) =>{
                 if(game.playerOneResult === "loss" && game.playerTwoResult === "loss") {
-                    console.log(game)
                     return game;
                 }})
                 
             const gamesCopy = [...noWinners]
-            console.log(gamesCopy)
             gamesCopy.sort(( a, b ) => {
                 if (a.date < b.date){
                     return 1;
@@ -80,8 +78,7 @@ useEffect(() => {
     let playerObj: Player;
     let playerExists = false;
 
-
-    for (let wins of games) { //lägger alla spel som har en vinnare i en lista
+    for (let wins of gamesToShow) { //lägger alla spel som har en vinnare i en lista
         if (wins.playerOneResult === "win") {
           allGamesWithWinner.push(wins)
         } else if (wins.playerTwoResult === "win"){
@@ -138,7 +135,6 @@ useEffect(() => {
           }
         }
     })
-//HÄR ÄR DET FEEEEEEEEEEEL
     let a = [playerWins[0]]
     playerWins.filter((i:Player) => {
       if (i.numberOfWins === a[0].numberOfWins && i.name !== a[0].name) {
@@ -151,66 +147,55 @@ useEffect(() => {
     })
 
     if (a[0] === undefined) {
-      setGamesToShow(games)
       setWinner([{name: "Ingen", wins: 0}])
       setPickedGame("all")
     } else {
       setWinner(a)
     }
-  }, [games]) //Den SKA Va games annars funkar inte no winner
+  }, [gamesToShow]) 
+
+  function reset() {
+    const gamesCopy = [...games] //sorterar spelarens matcher i kronologisk ordning
+        gamesCopy.sort(( a, b ) => {
+            if (a.date < b.date){
+            return 1;
+            }
+            if (a.date > b.date){
+            return -1;
+            }
+            return 0;
+        })
+    setPickedPlayer("all")
+
+    setGamesToShow(gamesCopy) 
+  }
 
     function handleClick(e:any){
-        let className = e.target.value;
-        console.log(className)
-        if (className ==="filterPlayer") {
-            setConfig(true)
-        } else if (className ==="filterGame") {
-            setConfig(false)
-        } else if (className ==="noWinners") {
+        let className = e.target.className;
+        if (className ==="toggleFilter") {
+            setConfig(!config)
+        }  else if (className ==="noWinners") {
             filterByNoWins(className)
         } else if(className === "reset") {
-            setPickedPlayer("all")
-            // setGamesToShow(games) // FEL! Ingen spread!
+            reset()
         }
     }
 
     return(
         <section className="filterBar">            
             <div className="filterButtons">
-            <div className='filterBox'>
-                     <div>
-                        <input onChange={handleClick} type="radio" id="reset" name="filter" value="reset"></input>
-                        <label htmlFor="reset">Visa alla</label>
+                <div className='filterBox'>
+                    <button type='button' onClick={handleClick} className ='reset'>Visa alla spel</button>
+                    <button type='button' onClick={handleClick} className ='noWinners'>Visa alla spel utan en vinnare</button>
+                    <div>    
+                        <p>Klicka på knappen för att välja ett specifikt spel eller en specifik spelare</p>
+                        <button type='button' onClick={handleClick} className ='toggleFilter'>{config ? "Välj spel" : "Välj spelare"}</button>
+                        {
+                            config ? (<PlayerDetails />) : (<GameDetails uniqueGames={uniqueGames}/>)
+                        }
                     </div>
-                    <div>
-                        <input onChange={handleClick} type="radio" id="noWinners" name="filter" value="noWinners"></input>
-                        <label htmlFor="noWinners">Visa alla spel utan vinnare</label>
-                    </div>
-                   
-                </div>    
-            <div className='filterBox'>
-                <div>
-                    <input onChange={handleClick} type="radio" id="filter" name="filter" value="filterPlayer"></input>
-                    <label htmlFor="html">Välj spelare</label>
                 </div>
-                    <div>
-                    <input onChange={handleClick} type="radio" id="filter" name="filter" value="filterGame"></input>
-                    <label htmlFor="html">Välj spel</label>
-                </div>
-                {
-            config ? (<PlayerDetails />) : (<GameDetails uniqueGames={uniqueGames}/>)}
             </div>
-                
-{/* 
-
-                <button type='button' onClick={handleClick} className ={`noWinners`}>{"Visa spel utan en vinnare"}</button>
-                
-                <button type='button' onClick={handleClick} className ='toggleFilter'>{config ? "Välj spel" : "Välj spelare"}</button>
-                
-                <button type='button' onClick={handleClick} className ={`reset`}>{ "Visa alla"}</button> */}
-            </div>
-            
-          
         </section>
     )
 }

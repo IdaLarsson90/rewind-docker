@@ -13,8 +13,6 @@ const GameListItem = ({game, showEditForm} :Props) => {
     const setGames = useGameStore((state) => state.setGames)
 
     function removeGame (id:number){
-        console.log("remove", id)
-        console.log('games', games)
         const newList = games.filter(game => game.id !== id)
 
         const gamesCopy = [...newList]

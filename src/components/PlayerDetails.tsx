@@ -57,7 +57,6 @@ const PlayerDetails = () => {
         })
     }
     lastWon()
-    console.log(players)
     return(
         <div className="playerDetails">
             <select onChange={filterByPlayer} name="name" id="name" >

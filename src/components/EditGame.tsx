@@ -45,9 +45,7 @@ const EditGame = () => {
     
     return(
         <form className="form form--edit" onSubmit={saveEdit}>
-            
           <h2>Ändra ett spel</h2>
-            
             <div>
                 <div>
                     <select onChange={handleChange} name="game" id="game" value={editFormData.game} required>

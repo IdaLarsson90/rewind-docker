@@ -12,7 +12,6 @@ const GameDetails = ({uniqueGames}: Props) => {
     const pickedGame = useFilterStore((state)=>state.pickedGame)
     const setPickedGame = useFilterStore((state) => state.setPickedGame)
     const winner = useFilterStore((state)=>state.winner)
-    // const { filterByGame, pickedGame, gamesToShow, winner } = useContext(FilterContext)
     
     const filterByGame = (event:any) =>{
         const query = event.target.value
@@ -21,12 +20,10 @@ const GameDetails = ({uniqueGames}: Props) => {
         if (query === "all") {
             filteredList = games.filter((game) => { 
             if (query === "all") {
-                console.log("alla valda")
                     return game
                 }
             })
-        } 
-        else {
+        } else {
             filteredList = games.filter((game) => { 
             if(game.game === query) {
                 return game
