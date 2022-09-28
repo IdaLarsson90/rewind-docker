@@ -29,8 +29,9 @@ const FilterBar = () => {
                     console.log(game)
                     return game;
                 }})
-                console.log(noWinners)
+                
             const gamesCopy = [...noWinners]
+            console.log(gamesCopy)
             gamesCopy.sort(( a, b ) => {
                 if (a.date < b.date){
                     return 1;
@@ -40,7 +41,6 @@ const FilterBar = () => {
                 }
                 return 0;
             })
-            // console.log(gamesCopy)
             setPickedPlayer('all')
             setGamesToShow(gamesCopy)
         } 
@@ -141,7 +141,7 @@ useEffect(() => {
     } else {
       setWinner(a)
     }
-  }, [gamesToShow])
+  }, [games]) //Den SKA Va games annars funkar inte no winner
 
     function handleClick(e:any){
         let className = e.target.value;
