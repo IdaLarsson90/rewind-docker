@@ -2,7 +2,7 @@ import './PlayerDetails.scss'
 import { usePlayerStore } from "../store/playerStore";
 import { useGameStore } from "../store/gameStore";
 import { useFilterStore } from "../store/filterStore";
-import { Game } from "../models/data"
+import { Game, Player } from "../models/data"
 
 const PlayerDetails = () => {
     const games = useGameStore((state) => state.games)
@@ -48,7 +48,6 @@ const PlayerDetails = () => {
 
     function lastWon () {
         const tenGames = gamesToShow.slice(0, 10);//gamestoshow
-
         gamesWon = tenGames.filter((game) => { 
             if (pickedPlayer === game.playerOneName && game.playerOneResult === "win") {
                 return game
@@ -64,8 +63,8 @@ const PlayerDetails = () => {
             <select onChange={filterByPlayer} name="name" id="name" >
             <option value="all">Visa alla spelare:</option>
             {
-                players.map((player:any) => 
-                    <option value={player.name} key={player}>{player.name}</option>)
+                players.map((player:Player, i:number) => 
+                    <option value={player.name} key={i}>{player.name}</option>)
             }
             </select>
             {

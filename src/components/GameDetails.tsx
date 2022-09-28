@@ -50,8 +50,8 @@ const GameDetails = ({uniqueGames}: Props) => {
           <select onChange={filterByGame} name="name" id="name" >
           <option value="all">Visa alla spel:</option>
           {
-            uniqueGames.map((game:any) => 
-            <option value={game} key={game}>{game}</option>)
+            uniqueGames.map((game:any, i:number) => 
+            <option value={game.game} key={i}>{game.game}</option>)
           }
           </select>
             {

@@ -5,6 +5,7 @@ import GameDetails from "./GameDetails"
 import { useGameStore } from "../store/gameStore";
 import { useFilterStore } from "../store/filterStore";
 import { usePlayerStore } from "../store/playerStore";
+import { Player, Game } from '../models/data';
 
 const FilterBar = () => {
     const [config, setConfig] = useState<boolean>(false);
@@ -18,8 +19,22 @@ const FilterBar = () => {
     
     useEffect(() => {
       const allGames = games.map( game => game.game)
-      const uniqueGamesList = [...new Set(allGames)]
-      setUniqueGames(uniqueGamesList)
+      const uniqueGames = [...new Set(allGames)]
+      
+      let uniqueGamesObjectList: Game[] = []
+        uniqueGames.forEach(uniqueGame => {
+        let game = { 
+            game: uniqueGame,
+            date: "",
+            playerOneName: "",
+            playerOneResult: "",
+            playerTwoName: "",
+            playerTwoResult: "",
+            id:0
+        }
+        uniqueGamesObjectList.push(game)
+      });
+      setUniqueGames(uniqueGamesObjectList)
     }, [games])
 
     function filterByNoWins(className:string) {
@@ -61,10 +76,11 @@ const FilterBar = () => {
 
 useEffect(() => {
     let allGamesWithWinner = [];
-    let playerWins: [] = [];
-    let playerObj = {};
+    let playerWins: Player[] = [];
+    let playerObj: Player;
     let playerExists = false;
-    console.log('blahaaa',gamesToShow)
+
+
     for (let wins of games) { //lägger alla spel som har en vinnare i en lista
         if (wins.playerOneResult === "win") {
           allGamesWithWinner.push(wins)
@@ -77,20 +93,20 @@ useEffect(() => {
        if(e.playerOneResult === "win") {
         if ( playerWins.length < 1) {
           playerObj = {
-            name: e.playerOneName, wins: 1
+            name: e.playerOneName, numberOfWins: 1
           }
           playerWins.push(playerObj)
         } else {
           for(let i = 0; i < playerWins.length; i++) {
             if(e.playerOneName == playerWins[i].name) {
-              playerWins[i].wins = playerWins[i].wins + 1
+              playerWins[i].numberOfWins = playerWins[i].numberOfWins + 1
               playerExists = true;
             }
           }
           if(!playerExists) {
             playerObj = {
               name: e.playerOneName,
-              wins: 1
+              numberOfWins: 1
             }
             playerWins.push(playerObj)
           }
@@ -101,20 +117,20 @@ useEffect(() => {
           if ( playerWins.length < 1) {
             playerObj = {
               name: e.playerTwoName,
-              wins: 1
+              numberOfWins: 1
             }
             playerWins.push(playerObj)
           } else {
             for(let i = 0; i < playerWins.length; i++) {
               if(e.playerTwoName == playerWins[i].name) {
-                playerWins[i].wins = playerWins[i].wins + 1
+                playerWins[i].numberOfWins = playerWins[i].numberOfWins + 1
                 playerExists = true;
               }
             } 
             if(!playerExists) {
               playerObj = {
                 name: e.playerTwoName,
-                wins: 1
+                numberOfWins: 1
               }
               playerWins.push(playerObj)
             }
@@ -124,11 +140,11 @@ useEffect(() => {
     })
 //HÄR ÄR DET FEEEEEEEEEEEL
     let a = [playerWins[0]]
-    playerWins.filter((i:object) => {
-      if (i.wins === a[0].wins && i.name !== a[0].name) {
+    playerWins.filter((i:Player) => {
+      if (i.numberOfWins === a[0].numberOfWins && i.name !== a[0].name) {
           a = [...a, i]
       }
-      else if (i.wins > a[0].wins) {
+      else if (i.numberOfWins > a[0].numberOfWins) {
           a = []
           a.push(i)
       }
@@ -167,18 +183,18 @@ useEffect(() => {
                         <label htmlFor="reset">Visa alla</label>
                     </div>
                     <div>
-                        <input onChange={handleClick} type="radio" id="css" name="filter" value="noWinners"></input>
-                        <label htmlFor="css">Visa alla spel utan vinnare</label>
+                        <input onChange={handleClick} type="radio" id="noWinners" name="filter" value="noWinners"></input>
+                        <label htmlFor="noWinners">Visa alla spel utan vinnare</label>
                     </div>
                    
                 </div>    
             <div className='filterBox'>
                 <div>
-                    <input onChange={handleClick} type="radio" id="html" name="filter" value="filterPlayer"></input>
+                    <input onChange={handleClick} type="radio" id="filter" name="filter" value="filterPlayer"></input>
                     <label htmlFor="html">Välj spelare</label>
                 </div>
                     <div>
-                    <input onChange={handleClick} type="radio" id="html" name="filter" value="filterGame"></input>
+                    <input onChange={handleClick} type="radio" id="filter" name="filter" value="filterGame"></input>
                     <label htmlFor="html">Välj spel</label>
                 </div>
                 {

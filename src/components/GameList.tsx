@@ -14,8 +14,8 @@ const GameList = ({showEditForm}: Props) => {
     <div className="gameList">
       <section className="table">
         {
-          gamesToShow.map((game:Game)=>{
-          return ( <GameListItem game={game} key={game.id} id={game.id}  showEditForm={showEditForm}/> )})
+          gamesToShow.map((game:Game, i:number)=>{
+          return ( <GameListItem game={game} key={i} id={game.id}  showEditForm={showEditForm}/> )})
         }
        
       </section>

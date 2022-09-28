@@ -19,8 +19,9 @@ function App() {
     const allPlayerTwo = games.map(game => game.playerTwoName)
     const allPlayers = allPlayerOne.concat(allPlayerTwo)
     const uniquePlayers = [...new Set(allPlayers)]
+    
     let uniquePlayersObjectList: Player[] = []
-    uniquePlayers.forEach(uniquePlayer => {
+      uniquePlayers.forEach(uniquePlayer => {
       let player = { 
         name: uniquePlayer, 
         numberOfWins:0
