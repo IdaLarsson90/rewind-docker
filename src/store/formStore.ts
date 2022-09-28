@@ -4,10 +4,10 @@ import {FormState} from '../models/data'
 interface FormStore {
     submit: boolean;
     setSubmit: (submit: boolean)=> void;
-    gameToEdit: [];
-    setGameToEdit: (gameToEdit: [])=>void;
-    editFormData: {};
-    setEditFormData: (editFormData: {})=>void;
+    gameToEdit: any;
+    setGameToEdit: (gameToEdit: FormState)=>void;
+    editFormData: FormState;
+    setEditFormData: (editFormData: FormState)=>void;
 }
 
 export const useFormStore = create<FormStore>((set, get)=>({

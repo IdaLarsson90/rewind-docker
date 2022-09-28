@@ -1,27 +1,26 @@
 import { useContext, useState } from "react"
-import { GameContext } from "../contexts/GameContext"
-import { FilterContext } from "../contexts/FilterContext"
-import { Games } from "../models/data"
+
+import { Game } from "../models/data"
 import bin from "../assets/bin.svg"
 import pen from "../assets/pen.svg"
-import { FormContext } from "../contexts/FormContext"
-
+import { useGameStore } from "../store/gameStore";
 
 interface Props{
-    game: Games,
+    game: Game,
     showEditForm:any,
  
 }
 
 
 const GameListItem = ({game, showEditForm} :Props) => {
-    // const {games, setGames} = useContext(GameContext)
-    const { gamesToShow, setGamesToShow } = useContext(FilterContext)
-    // const { handleEdit }= useContext(FormContext)
+    const games = useGameStore((state) => state.games)
+    const setGames = useGameStore((state) => state.setGames)
+
 
     function removeGame (id:number){
         console.log("remove", id)
-        const newList = gamesToShow.filter(game => game.id !== id)
+        console.log('games', games)
+        const newList = games.filter(game => game.id !== id)
 
         const gamesCopy = [...newList]
         gamesCopy.sort(( a, b ) => {
@@ -33,7 +32,9 @@ const GameListItem = ({game, showEditForm} :Props) => {
             }
             return 0;
         })
-        setGamesToShow(gamesCopy)
+        setGames(gamesCopy)
+        // console.log(typeof gamesCopy)
+        localStorage.setItem("games", JSON.stringify(gamesCopy))
     }
 
     

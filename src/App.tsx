@@ -4,13 +4,13 @@ import Main from './components/Main/Main'
 import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
 import { useGameStore } from "./store/gameStore";
+import { useFilterStore } from "./store/filterStore";
 import { usePlayerStore } from "./store/playerStore";
-import FilterContextProvider from './contexts/FilterContext'
-import FormContextProvider from './contexts/FormContext'
 
 
 function App() {
   const games = useGameStore((state) => state.games)
+  const setGamesToShow = useGameStore((state) => state.setGamesToShow)
   const setPlayers = usePlayerStore((state) => state.setPlayers)
 
   useEffect(() => {
@@ -18,27 +18,45 @@ function App() {
     const allPlayerTwo = games.map(game => game.playerTwoName)
     const allPlayers = allPlayerOne.concat(allPlayerTwo)
     const uniquePlayers = [...new Set(allPlayers)]
-    setPlayers(uniquePlayers)
-
+    setPlayers(uniquePlayers) //hämtar alla unika spelare
 
     localStorage.setItem('games', JSON.stringify(games)) //sparar min default-lista till local storage
+    const gamesCopy = [...games]
+            gamesCopy.sort(( a, b ) => {
+                if (a.date < b.date){
+                return 1;
+                }
+                if (a.date > b.date){
+                return -1;
+                }
+                return 0;
+            })
+            // console.log(gamesCopy)
+          setGamesToShow(gamesCopy)
+
 }, [games])
 
-  return (
-    <div className="app">
-      {/* <GameContextProvider> */}
-        {/* <PlayerContextProvider> */}
-          <FilterContextProvider>
-            {/* <FormContextProvider> */}
-              <Header/>
-              {/* <Hero/> */}
-              <Main />
-            {/* </FormContextProvider> */}
-          </FilterContextProvider>
-        {/* </PlayerContextProvider> */}
-      {/* </GameContextProvider> */}
-    </div>
-  )
+ 
+
+    useEffect(() => {//sorterar alla matcher när sidan startas och games uppdateras
+     
+    }, [games])
+
+
+
+    return (
+      <div className="app">
+
+            {/* <FilterContextProvider> */}
+
+                <Header/>
+                {/* <Hero/> */}
+                <Main />
+      
+            {/* </FilterContextProvider> */}
+        
+      </div>
+    )
 }
 
 export default App

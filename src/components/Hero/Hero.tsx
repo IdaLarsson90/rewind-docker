@@ -1,12 +1,6 @@
 
 import './Hero.scss'
 import dice from '../../assets/dice.avif'
-import { useContext } from 'react'
-import { FormContext } from '../../contexts/FormContext'
-import { FilterContext } from "../../contexts/FilterContext"
-import GameForm from '../../components/GameForm'
-import GameList from '../../components/GameList'
-import FilterBar from '../../components/FilterBar'
 
 const Hero = () =>{
 

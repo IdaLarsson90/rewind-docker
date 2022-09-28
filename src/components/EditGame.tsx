@@ -1,15 +1,14 @@
 import './EditGame.scss'
-import { useContext } from "react";
-// import { GameContext } from "../contexts/GameContext"
-import {FormContext} from "../contexts/FormContext"
-// import { GameContextType } from '../models/data';
 import { useGameStore } from "../store/gameStore";
+import { useFormStore } from "../store/formStore";
 
 const EditGame = () => {
     const games = useGameStore((state) => state.games)
     const setGames = useGameStore((state) => state.setGames)
-    // const { games, setGames } = useContext<GameContextType>(GameContext)
-    const { editFormData, setEditFormData, gameToEdit, setSubmit, activeEdit, setActiveEdit} = useContext(FormContext)
+    const setSubmit = useFormStore((state) => state.setSubmit)
+    const gameToEdit = useFormStore((state) => state.gameToEdit)
+    const editFormData = useFormStore((state) => state.editFormData)
+    const setEditFormData = useFormStore((state) => state.setEditFormData)
 
     const saveEdit = (event:React.FormEvent<HTMLInputElement>) => {
         event.preventDefault();
@@ -37,12 +36,12 @@ const EditGame = () => {
             })
             setGames(gamesCopy) 
             setSubmit(true)
-            setActiveEdit(false)
         } 
     }
     const handleChange = (event: any) => {
         setEditFormData({ ...editFormData, [event.target.name]: event.target.value });
     }
+    
     return(
         <form className="form form--edit" onSubmit={saveEdit}>
             
@@ -82,7 +81,7 @@ const EditGame = () => {
             </div>
             <div className="form-footer">
                 <input className="primary-button" type="submit" id="button-green" value="Spara ändringar" />
-                <button className='secondary-button' onClick={()=>{setSubmit(true); setActiveEdit(false)}}>Stäng</button>
+                <button className='secondary-button' onClick={()=>{setSubmit(true)}}>Stäng</button>
             </div>
         </form>
     )

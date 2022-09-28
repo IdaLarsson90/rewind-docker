@@ -1,18 +1,52 @@
 import './PlayerDetails.scss'
-import { useContext } from "react"
 import { usePlayerStore } from "../store/playerStore";
-
-import { FilterContext } from "../contexts/FilterContext"
+import { useGameStore } from "../store/gameStore";
+import { useFilterStore } from "../store/filterStore";
+import { Game } from "../models/data"
 
 const PlayerDetails = () => {
-
-    const players = usePlayerStore((state) => state.players)
-    const { gamesToShow, filterByPlayer, pickedPlayer } = useContext(FilterContext)
+    const games = useGameStore((state) => state.games)
     
+    const players = usePlayerStore((state) => state.players)
+    const setGamesToShow = useGameStore((state) => state.setGamesToShow)
+    const gamesToShow = useGameStore((state) => state.gamesToShow)
+    const setPickedPlayer = useFilterStore((state) => state.setPickedPlayer)
+    
+    const pickedPlayer = useFilterStore((state) => state.pickedPlayer)
+    // const { gamesToShow,  pickedPlayer } = useContext(FilterContext)
+   
+   const filterByPlayer = (event:React.ChangeEvent<HTMLInputElement>) =>{ //välj en spelare
+        const query = event.target.value
+        let filteredList;
+        if (query === "all") {
+            filteredList = games.filter((game:Game) => { 
+            if (query === "all") {
+                  return game
+                }
+            })
+        } else {
+            filteredList = games.filter((game:Game) => { 
+            if(game.playerTwoName === query || game.playerOneName === query) {
+                return game
+            }})
+        }
+        const gamesCopy = [...filteredList] //sorterar spelarens matcher i kronologisk ordning
+        gamesCopy.sort(( a, b ) => {
+            if (a.date < b.date){
+                return 1;
+            }
+            if (a.date > b.date){
+                return -1;
+            }
+            return 0;
+        })
+        setGamesToShow(gamesCopy)
+        setPickedPlayer(query)
+    }
     let gamesWon = [];
 
     function lastWon () {
-        const tenGames = gamesToShow.slice(0, 10);
+        const tenGames = games.slice(0, 10);//gamestoshow
 
         gamesWon = tenGames.filter((game) => { 
             if (pickedPlayer === game.playerOneName && game.playerOneResult === "win") {

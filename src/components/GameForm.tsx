@@ -1,22 +1,16 @@
 import './GameForm.scss'
-import { useState, useContext, useEffect } from "react";
 
 import SubmitGame from "./SubmitGame";
 import EditGame from "./EditGame";
-import { FormContext } from "../contexts/FormContext";
-
+import { useFormStore } from "../store/formStore";
 
 
 const GameForm = () =>{
-
-    const {submit} = useContext(FormContext)
-
-    
+    const submit = useFormStore((state) => state.submit)
 
     return (
         <div className="box">
-        {submit ? (<SubmitGame />):(<EditGame/>)}
-        
+            {submit ? (<SubmitGame />):(<EditGame/>)}
         </div>
     );
 }
