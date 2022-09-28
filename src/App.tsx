@@ -20,7 +20,7 @@ function App() {
     const uniquePlayers = [...new Set(allPlayers)]
     setPlayers(uniquePlayers) //hämtar alla unika spelare
 
-    localStorage.setItem('games', JSON.stringify(games)) //sparar min default-lista till local storage
+    localStorage.setItem('games', JSON.stringify(games)) //sparar till local storage
     const gamesCopy = [...games]
             gamesCopy.sort(( a, b ) => {
                 if (a.date < b.date){
@@ -38,23 +38,16 @@ function App() {
 
  
 
-    useEffect(() => {//sorterar alla matcher när sidan startas och games uppdateras
+    // useEffect(() => {//sorterar alla matcher när sidan startas och games uppdateras
      
-    }, [games])
+    // }, [games])
 
 
 
     return (
       <div className="app">
-
-            {/* <FilterContextProvider> */}
-
-                <Header/>
-                {/* <Hero/> */}
-                <Main />
-      
-            {/* </FilterContextProvider> */}
-        
+        <Header/>
+        <Main />
       </div>
     )
 }

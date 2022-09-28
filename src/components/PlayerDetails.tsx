@@ -43,10 +43,11 @@ const PlayerDetails = () => {
         setGamesToShow(gamesCopy)
         setPickedPlayer(query)
     }
+
     let gamesWon = [];
 
     function lastWon () {
-        const tenGames = games.slice(0, 10);//gamestoshow
+        const tenGames = gamesToShow.slice(0, 10);//gamestoshow
 
         gamesWon = tenGames.filter((game) => { 
             if (pickedPlayer === game.playerOneName && game.playerOneResult === "win") {
@@ -57,6 +58,7 @@ const PlayerDetails = () => {
         })
     }
     lastWon()
+
     return(
         <div className="playerDetails">
             <select onChange={filterByPlayer} name="name" id="name" >

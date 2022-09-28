@@ -20,51 +20,51 @@ const FilterBar = () => {
       const allGames = games.map( game => game.game)
       const uniqueGamesList = [...new Set(allGames)]
       setUniqueGames(uniqueGamesList)
-  }, [games])
+    }, [games])
 
-  function filterByNoWins(className) {
-    console.log("to show", gamesToShow)
-    console.log("games", games)
-    if (className === "noWinners") {
-        console.log(games)
-        let noWinners = games.filter((game) =>{
-            if(game.playerOneResult === "loss" && game.playerTwoResult === "loss") {
-                console.log(game)
-                return game;
-            }})
+    function filterByNoWins(className:string) {
+           if (className === "noWinners") {
+            let noWinners = games.filter((game) =>{
+                if(game.playerOneResult === "loss" && game.playerTwoResult === "loss") {
+                    console.log(game)
+                    return game;
+                }})
+                console.log(noWinners)
             const gamesCopy = [...noWinners]
-        gamesCopy.sort(( a, b ) => {
-            if (a.date < b.date){
-            return 1;
-            }
-            if (a.date > b.date){
-            return -1;
-            }
-            return 0;
-        })
-        setPickedPlayer('all')
-        setGamesToShow(gamesCopy)
-    } else {
-        console.log("Stopp med pålägg")
-        const gamesCopy = [...games]
-        gamesCopy.sort(( a, b ) => {
-            if (a.date < b.date){
-            return 1;
-            }
-            if (a.date > b.date){
-            return -1;
-            }
-            return 0;
-        })
-        setGamesToShow(gamesCopy)
+            gamesCopy.sort(( a, b ) => {
+                if (a.date < b.date){
+                    return 1;
+                }
+                if (a.date > b.date){
+                    return -1;
+                }
+                return 0;
+            })
+            // console.log(gamesCopy)
+            setPickedPlayer('all')
+            setGamesToShow(gamesCopy)
+        } 
+        else {
+            const gamesCopy = [...games]
+            gamesCopy.sort(( a, b ) => {
+                if (a.date < b.date){
+                return 1;
+                }
+                if (a.date > b.date){
+                return -1;
+                }
+                return 0;
+            })
+            setGamesToShow(gamesCopy)
+        }
     }
-}
+
 useEffect(() => {
     let allGamesWithWinner = [];
     let playerWins: [] = [];
     let playerObj = {};
     let playerExists = false;
-
+    console.log('blahaaa',gamesToShow)
     for (let wins of gamesToShow) { //lägger alla spel som har en vinnare i en lista
         if (wins.playerOneResult === "win") {
           allGamesWithWinner.push(wins)
@@ -141,7 +141,7 @@ useEffect(() => {
     } else {
       setWinner(a)
     }
-  }, [])
+  }, [gamesToShow])
 
     function handleClick(e:any){
         let className = e.target.value;
@@ -162,11 +162,11 @@ useEffect(() => {
             <div className="filterButtons">
             <div className='filterBox'>
                      <div>
-                        <input type="radio" id="reset" name="filter" value="reset"></input>
+                        <input onChange={handleClick} type="radio" id="reset" name="filter" value="reset"></input>
                         <label htmlFor="reset">Visa alla</label>
                     </div>
                     <div>
-                        <input type="radio" id="css" name="filter" value="noWinners"></input>
+                        <input onChange={handleClick} type="radio" id="css" name="filter" value="noWinners"></input>
                         <label htmlFor="css">Visa spel utan vinnare</label>
                     </div>
                    
