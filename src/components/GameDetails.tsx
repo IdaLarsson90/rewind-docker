@@ -13,8 +13,8 @@ const GameDetails = ({uniqueGames}: Props) => {
     const setPickedGame = useFilterStore((state) => state.setPickedGame)
     const winner = useFilterStore((state)=>state.winner)
     // const { filterByGame, pickedGame, gamesToShow, winner } = useContext(FilterContext)
+    
     const filterByGame = (event:any) =>{
-        
         const query = event.target.value
 
         let filteredList;

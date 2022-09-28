@@ -154,7 +154,7 @@ useEffect(() => {
             filterByNoWins(className)
         } else if(className === "reset") {
             setPickedPlayer("all")
-            setGamesToShow([...games])
+            // setGamesToShow(games) // FEL! Ingen spread!
         }
     }
 

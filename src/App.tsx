@@ -6,6 +6,7 @@ import Hero from './components/Hero/Hero'
 import { useGameStore } from "./store/gameStore";
 import { useFilterStore } from "./store/filterStore";
 import { usePlayerStore } from "./store/playerStore";
+import { Player } from './models/data'
 
 
 function App() {
@@ -18,30 +19,29 @@ function App() {
     const allPlayerTwo = games.map(game => game.playerTwoName)
     const allPlayers = allPlayerOne.concat(allPlayerTwo)
     const uniquePlayers = [...new Set(allPlayers)]
-    setPlayers(uniquePlayers) //hämtar alla unika spelare
+    let uniquePlayersObjectList: Player[] = []
+    uniquePlayers.forEach(uniquePlayer => {
+      let player = { 
+        name: uniquePlayer, 
+        numberOfWins:0
+      }
+      uniquePlayersObjectList.push(player)
+    });
+    setPlayers(uniquePlayersObjectList) //hämtar alla unika spelare
 
     localStorage.setItem('games', JSON.stringify(games)) //sparar till local storage
     const gamesCopy = [...games]
-            gamesCopy.sort(( a, b ) => {
-                if (a.date < b.date){
-                return 1;
-                }
-                if (a.date > b.date){
-                return -1;
-                }
-                return 0;
-            })
-            // console.log(gamesCopy)
-          setGamesToShow(gamesCopy)
-
-}, [games])
-
- 
-
-    // useEffect(() => {//sorterar alla matcher när sidan startas och games uppdateras
-     
-    // }, [games])
-
+      gamesCopy.sort(( a, b ) => {
+          if (a.date < b.date){
+          return 1;
+          }
+          if (a.date > b.date){
+          return -1;
+          }
+          return 0;
+      })
+    setGamesToShow(gamesCopy)
+  }, [games])
 
 
     return (

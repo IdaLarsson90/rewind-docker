@@ -58,14 +58,14 @@ const PlayerDetails = () => {
         })
     }
     lastWon()
-
+    console.log(players)
     return(
         <div className="playerDetails">
             <select onChange={filterByPlayer} name="name" id="name" >
             <option value="all">Visa alla spelare:</option>
             {
                 players.map((player:any) => 
-                <option value={player} key={player}>{player}</option>)
+                    <option value={player.name} key={player}>{player.name}</option>)
             }
             </select>
             {
