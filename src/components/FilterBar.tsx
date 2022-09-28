@@ -65,7 +65,7 @@ useEffect(() => {
     let playerObj = {};
     let playerExists = false;
     console.log('blahaaa',gamesToShow)
-    for (let wins of gamesToShow) { //lägger alla spel som har en vinnare i en lista
+    for (let wins of games) { //lägger alla spel som har en vinnare i en lista
         if (wins.playerOneResult === "win") {
           allGamesWithWinner.push(wins)
         } else if (wins.playerTwoResult === "win"){
@@ -154,6 +154,7 @@ useEffect(() => {
             filterByNoWins(className)
         } else if(className === "reset") {
             setPickedPlayer("all")
+            setGamesToShow([...games])
         }
     }
 
@@ -167,7 +168,7 @@ useEffect(() => {
                     </div>
                     <div>
                         <input onChange={handleClick} type="radio" id="css" name="filter" value="noWinners"></input>
-                        <label htmlFor="css">Visa spel utan vinnare</label>
+                        <label htmlFor="css">Visa alla spel utan vinnare</label>
                     </div>
                    
                 </div>    
@@ -184,9 +185,9 @@ useEffect(() => {
             config ? (<PlayerDetails />) : (<GameDetails uniqueGames={uniqueGames}/>)}
             </div>
                 
+{/* 
 
-
-                {/* <button type='button' onClick={handleClick} className ={`noWinners`}>{"Visa spel utan en vinnare"}</button>
+                <button type='button' onClick={handleClick} className ={`noWinners`}>{"Visa spel utan en vinnare"}</button>
                 
                 <button type='button' onClick={handleClick} className ='toggleFilter'>{config ? "Välj spel" : "Välj spelare"}</button>
                 

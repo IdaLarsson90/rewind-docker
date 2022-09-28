@@ -34,6 +34,7 @@ const EditGame = () => {
                 }
                 return 0;
             })
+            // localStorage.setItem(JSON.stringify(gamesCopy))
             setGames(gamesCopy) 
             setSubmit(true)
         } 

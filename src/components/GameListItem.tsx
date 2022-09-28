@@ -1,5 +1,3 @@
-import { useContext, useState } from "react"
-
 import { Game } from "../models/data"
 import bin from "../assets/bin.svg"
 import pen from "../assets/pen.svg"
@@ -8,14 +6,11 @@ import { useGameStore } from "../store/gameStore";
 interface Props{
     game: Game,
     showEditForm:any,
- 
 }
-
 
 const GameListItem = ({game, showEditForm} :Props) => {
     const games = useGameStore((state) => state.games)
     const setGames = useGameStore((state) => state.setGames)
-
 
     function removeGame (id:number){
         console.log("remove", id)
@@ -33,7 +28,6 @@ const GameListItem = ({game, showEditForm} :Props) => {
             return 0;
         })
         setGames(gamesCopy)
-        // console.log(typeof gamesCopy)
         localStorage.setItem("games", JSON.stringify(gamesCopy))
     }
 
