@@ -2,9 +2,7 @@ import './App.scss'
 import { useEffect } from 'react'
 import Main from './components/Main/Main'
 import Header from './components/Header/Header'
-import Hero from './components/Hero/Hero'
 import { useGameStore } from "./store/gameStore";
-import { useFilterStore } from "./store/filterStore";
 import { usePlayerStore } from "./store/playerStore";
 import { Player } from './models/data'
 

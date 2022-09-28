@@ -15,7 +15,7 @@ const FilterBar = () => {
     const setPickedPlayer = useFilterStore((state)=>state.setPickedPlayer)
     const setWinner = useFilterStore((state) => state.setWinner)
     const setPickedGame = useFilterStore((state) => state.setPickedGame)
-    const [uniqueGames, setUniqueGames] = useState([])
+    const [uniqueGames, setUniqueGames] = useState<Game[]>([])
     
     useEffect(() => {
       const allGames = games.map( game => game.game)

@@ -1,6 +1,7 @@
 import './GameDetails.scss'
 import { useGameStore } from "../store/gameStore";
 import {useFilterStore} from "../store/filterStore"
+import { Game, Player } from '../models/data';
 
 interface Props{
     uniqueGames: any;
@@ -47,18 +48,18 @@ const GameDetails = ({uniqueGames}: Props) => {
           <select onChange={filterByGame} name="name" id="name" >
           <option value="all">Visa alla spel:</option>
           {
-            uniqueGames.map((game:any, i:number) => 
+            uniqueGames.map((game:Game, i:number) => 
             <option value={game.game} key={i}>{game.game}</option>)
           }
           </select>
             {
             pickedGame !=="all" ? (
-                <p className='gameInfo'> {winner.map((e, i)=>{
+                <p className='gameInfo'> {winner.map((player:Player, i:number)=>{
                     if(i + 1 === winner.length || winner.length === 0) {
-                        return <span key={i}> {e.name} </span>
+                        return <span key={i}> {player.name} </span>
                     } 
                     else {
-                        return <span key={i}> {e.name} och </span>
+                        return <span key={i}> {player.name} och </span>
                     }
                 })} har vunnit flest antal gånger i {pickedGame} någonsin</p>
             ) : ( <></>)

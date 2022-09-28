@@ -11,9 +11,7 @@ const PlayerDetails = () => {
     const setGamesToShow = useGameStore((state) => state.setGamesToShow)
     const gamesToShow = useGameStore((state) => state.gamesToShow)
     const setPickedPlayer = useFilterStore((state) => state.setPickedPlayer)
-    
     const pickedPlayer = useFilterStore((state) => state.pickedPlayer)
-    // const { gamesToShow,  pickedPlayer } = useContext(FilterContext)
    
    const filterByPlayer = (event:React.ChangeEvent<HTMLSelectElement>) =>{ //välj en spelare
         const query = event.target.value

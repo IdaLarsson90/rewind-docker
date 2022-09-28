@@ -10,7 +10,7 @@ const EditGame = () => {
     const editFormData = useFormStore((state) => state.editFormData)
     const setEditFormData = useFormStore((state) => state.setEditFormData)
 
-    const saveEdit = (event:React.FormEvent<HTMLInputElement>) => {
+    const saveEdit = (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (games.find(e => e.id === gameToEdit.id)){
@@ -34,7 +34,6 @@ const EditGame = () => {
                 }
                 return 0;
             })
-            // localStorage.setItem(JSON.stringify(gamesCopy))
             setGames(gamesCopy) 
             setSubmit(true)
         } 
