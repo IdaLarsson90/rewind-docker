@@ -27,7 +27,7 @@ RUN npm run build
 EXPOSE 8080
 
 #Starta en webbserver som servar de statiska filerna i /app/dist
-CMD ["http-server", "dist"]
+CMD ["http-server", "dist","-p 8080"]
 
 #i cmd: docker build -t react-docker-demo:latest .
 #i cmd: docker run --name react-docker-container -d -p 8080:8080
