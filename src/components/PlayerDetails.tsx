@@ -15,7 +15,7 @@ const PlayerDetails = () => {
     const pickedPlayer = useFilterStore((state) => state.pickedPlayer)
     // const { gamesToShow,  pickedPlayer } = useContext(FilterContext)
    
-   const filterByPlayer = (event:React.ChangeEvent<HTMLInputElement>) =>{ //välj en spelare
+   const filterByPlayer = (event:React.ChangeEvent<HTMLSelectElement>) =>{ //välj en spelare
         const query = event.target.value
         let filteredList;
         if (query === "all") {
