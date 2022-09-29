@@ -17,7 +17,6 @@ const GameList = ({showEditForm}: Props) => {
           gamesToShow.map((game:Game, i:number)=>{
           return ( <GameListItem game={game} key={i}  showEditForm={showEditForm}/> )})
         }
-       
       </section>
     </div>
   )

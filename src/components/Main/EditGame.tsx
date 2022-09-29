@@ -1,6 +1,7 @@
 import './EditGame.scss'
 import { useGameStore } from "../../store/gameStore";
 import { useFormStore } from "../../store/formStore";
+import { useState } from 'react';
 
 const EditGame = () => {
     const games = useGameStore((state) => state.games)
@@ -9,6 +10,7 @@ const EditGame = () => {
     const gameToEdit = useFormStore((state) => state.gameToEdit)
     const editFormData = useFormStore((state) => state.editFormData)
     const setEditFormData = useFormStore((state) => state.setEditFormData)
+    const [isExpanded, setIsExpanded] = useState("active")
 
     const saveEdit = (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -42,12 +44,11 @@ const EditGame = () => {
     }
   
     function toggleAccordian(e:any) {
-        console.log(e.currentTarget)
-        e.currentTarget.parentNode.classList.toggle("active")
+        setIsExpanded("active")
       }
 
     return(
-        <form className={`form container`} onSubmit={saveEdit}>
+        <form className={`form container ${isExpanded}`} onSubmit={saveEdit}>
           <h2 onClick={(e)=>{toggleAccordian(e)}} className='label'>Ändra ett spel</h2>
             <div className="content">
                 <div>

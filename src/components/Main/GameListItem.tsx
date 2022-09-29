@@ -29,7 +29,6 @@ const GameListItem = ({game, showEditForm} :Props) => {
         localStorage.setItem("games", JSON.stringify(gamesCopy))
     }
     function toggleAccordian(e:any) {
-        console.log(e.target.id)
         e.currentTarget.classList.toggle("active")
       }
     

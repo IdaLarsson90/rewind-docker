@@ -44,7 +44,6 @@ const SubmitGame = () =>{
     }
 
     function toggleAccordian(e:any) {
-        console.log(e.target.id)
         e.currentTarget.parentNode.classList.toggle("active")
       }
 

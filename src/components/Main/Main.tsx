@@ -20,6 +20,7 @@ const Main = () =>{
     })
     setGameToEdit(pickedGameToEdit[0])
     document.documentElement.scrollTop = 0;
+    
   }
 
   return (
