@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Game } from "../../models/data"
 import { useGameStore } from "../../store/gameStore";
-import { useAccordianStore } from "../../store/accordianStore";
 
 const SubmitGame = () =>{
     const [formData, setFormData] = useState<Game>({
@@ -15,9 +14,6 @@ const SubmitGame = () =>{
     })
     const games = useGameStore((state) => state.games)
     const setGames = useGameStore((state) => state.setGames)
-    const isAccordianVisible = useAccordianStore((state)=>state.isAccordianVisible)
-    const toggleAccordianVisible = useAccordianStore((state)=>state.toggleAccordianVisible)
-    let visible:string = ""
     const addGame = (formData:Game, setFormData:(game:Game)=>void) => { 
         setGames([ ...games, { //Lägger till nytt spel i listan
             game: formData.game, 
@@ -46,14 +42,15 @@ const SubmitGame = () =>{
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>|  React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     }
-    function toggleAccordian(){
-        toggleAccordianVisible()
-        
-    }
+
+    function toggleAccordian(e:any) {
+        console.log(e.target.id)
+        e.currentTarget.parentNode.classList.toggle("active")
+      }
 
     return (
-        <form className={`form container ${isAccordianVisible}`}  onSubmit={handleSubmit}>
-            <h2 onClick={toggleAccordian} className={`label`}>Lägg till nytt spel</h2>
+        <form className={`form container`}  onSubmit={handleSubmit}>
+            <h2 onClick={(e)=>{toggleAccordian(e)}} className="label" id="addGame">Lägg till nytt spel</h2>
             <div className="content">
                 <div>
                     <div>

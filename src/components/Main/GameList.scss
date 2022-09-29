@@ -9,9 +9,6 @@
     .table{
         width: 100%;
         padding:1rem;
-        
-        // margin-top: 2rem;
-        // border-collapse: none;
         border-spacing: 0;
         height: fit-content;
         .tr{
@@ -81,14 +78,16 @@
         }
     }
 }
+@media only screen and (max-width: 480px) {
+    .gameList{
+        .table{
+            .tr{
+                padding-top: 5px;
+                justify-content: space-between;
+                padding-right: 50px;
+                
+            }
+        }
+    }
 
-// @media screen and (max-width: 1120px) {
-//     table>tbody>tr>th {
-//         width: 100%;
-//         float: left;
-//     }
-//     table>tbody>tr>td {
-//         width: 100%;
-//         float: left;
-//     }
-// }
+}

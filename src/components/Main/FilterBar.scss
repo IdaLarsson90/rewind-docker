@@ -1,13 +1,14 @@
 @import "../../models/variables";
 .filterBar {
     grid-area: filter;
-    padding: 1rem 1.5rem;
+    padding: 0rem 1.5rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1.7rem;
     // align-items: center;
     // justify-content: flex-end;
     margin: 0;
+    width: 100%;
     background-color: #fff;
 
     button {
@@ -25,30 +26,28 @@
             background-color: $grey;
         }
     }
-    .active {
-        background-color: $grey;
-        color: $light-grey;
+    select {
+        padding: 0;
+        margin: 0;
     }
-
- 
-        select {
-            padding: 0;
-            margin: 0;
-        }
-        .filterButtons {
+    .filterButtons {
+        display: flex;
+        flex-direction: column;
+        // justify-content: space-around;
+        // margin: 0;
+        .filterBox {
             display: flex;
-            flex-direction: column;
-            // justify-content: space-around;
-            // margin: 0;
-            .filterBox {
-                display: flex;
-                // padding: 0.5rem;
-                flex-wrap: wrap;
-                // border: 0.5px solid $grey;
-                div {
-                    padding: 0.5rem;
-                }
+            // padding: 0.5rem;
+            flex-wrap: wrap;
+            // border: 0.5px solid $grey;
+            div {
+                padding: 0.5rem;
             }
         }
+    }
     
+}
+
+@media only screen and (min-width: 480px)and (max-width: 1080px) {
+   
 }

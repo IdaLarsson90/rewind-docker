@@ -11,8 +11,8 @@ const GameList = ({showEditForm}: Props) => {
     const gamesToShow = useGameStore((state) => state.gamesToShow)
 
     return (
-    <div className="gameList">
-      <section className="table">
+    <div className="gameList accordion-body">
+      <section className="table accordion">
         {
           gamesToShow.map((game:Game, i:number)=>{
           return ( <GameListItem game={game} key={i}  showEditForm={showEditForm}/> )})

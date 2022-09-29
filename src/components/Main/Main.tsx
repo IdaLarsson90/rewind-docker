@@ -24,9 +24,9 @@ const Main = () =>{
 
   return (
     <main className='main'>
-      <GameForm />
-      <FilterBar/>
-      <GameList showEditForm={showEditForm}/> 
+        <GameForm />
+        <FilterBar/>
+        <GameList showEditForm={showEditForm}/>
     </main>
   )
 }

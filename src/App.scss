@@ -52,40 +52,41 @@ p, input[type=text], input[type=date], select, label, td, .secondary-button{
 
 @media only screen and (max-width: 480px) {
     //ACCORDION STYLE
-    .accordion {
+   
+    .container {
+        position: relative;
+        width: 100%;
+        // margin: 10px 10px;
         
-        .container {
-            position: relative;
-            // margin: 10px 10px;
-        }
-        .container.true .content {
-            height: 100%;
-          }
-        .container.true .label::before {
+    }
+    .label{
+        font-size: 1rem;
+        cursor: pointer;
+        position: relative;
+        width: 100%;
+    }
+    .label::before {
+        content: '+';
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        font-size: 30px;
+        transform: translateY(-50%);
+    }
+    .active.label::before {
         content: '-';
         font-size: 30px;
-        }
-        .label{
-            cursor: pointer;
-            position: relative;
-        }
-        .label::before {
-            content: '+';
-            position: absolute;
-            top: 50%;
-            right: 5px;
-            font-size: 30px;
-            transform: translateY(-50%);
-        }
-        .content {
-            position: relative;
-            // background: white;
-            height: 0;
-            // font-size: 20px;
-            // text-align: justify;
-            // width: 780px;
-            overflow: hidden;
-            transition: 0.5s;
-          }
     }
+   .active .content {
+        height: 100%;
+        display: flex;
+    }
+    .content {
+        display: none;
+        height: 0;
+        width: 100%;
+        overflow: hidden;
+        transition: 0.5s;
+    }
+
 }

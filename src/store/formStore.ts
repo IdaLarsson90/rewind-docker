@@ -1,5 +1,5 @@
 import create from "zustand";
-import {FormState, Game} from '../models/data'
+import {Game} from '../models/data'
 
 interface FormStore {
     submit: boolean;

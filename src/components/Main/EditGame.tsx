@@ -40,10 +40,15 @@ const EditGame = () => {
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>|  React.ChangeEvent<HTMLInputElement> ) => { 
         setEditFormData({ ...editFormData, [event.target.name]: event.target.value });
     }
-    
+  
+    function toggleAccordian(e:any) {
+        console.log(e.target.id)
+        e.currentTarget.parentNode.classList.toggle("active")
+      }
+
     return(
-        <form className="form form--edit container" onSubmit={saveEdit}>
-          <h2 className='label'>Ändra ett spel</h2>
+        <form className={`form container`} onSubmit={saveEdit}>
+          <h2 onClick={(e)=>{toggleAccordian(e)}} className='label'>Ändra ett spel</h2>
             <div className="content">
                 <div>
                     <div>
@@ -80,7 +85,7 @@ const EditGame = () => {
             
             <div className="form-footer">
                 <input className="primary-button" type="submit" id="button-green" value="Spara ändringar" />
-                <button className='secondary-button' onClick={()=>{setSubmit(true)}}>Stäng</button>
+                <button className='secondary-button' onClick={()=>{setSubmit(true); toggleAccordianVisible()}}>Stäng</button>
             </div>
             </div>
         </form>

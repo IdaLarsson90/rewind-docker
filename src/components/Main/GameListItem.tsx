@@ -28,12 +28,18 @@ const GameListItem = ({game, showEditForm} :Props) => {
         setGames(gamesCopy)
         localStorage.setItem("games", JSON.stringify(gamesCopy))
     }
-
+    function toggleAccordian(e:any) {
+        console.log(e.target.id)
+        e.currentTarget.classList.toggle("active")
+      }
     
     return(
-        <div className="tr">
-            <p className="td">{game.game}</p>
-            <p className="td">{game.date}</p>
+        
+        <div onClick={(e)=>{toggleAccordian(e)}} className="tr container label">
+            <div>
+                <p className="td">{game.game}</p>
+                <p className="td content">{game.date}</p>
+            </div>
 
             <div>
                 <p className="td">{game.playerOneName}</p>
@@ -41,21 +47,21 @@ const GameListItem = ({game, showEditForm} :Props) => {
                 <p className="td">{game.playerTwoName}</p>
             </div>
             
-            <div>
+            <div className="content">
                 <p className="td">{game.playerOneResult}</p>
                 <p className="td"> - </p>
                 <p className="td">{game.playerTwoResult}</p>
             </div>
 
-            <p className="buttons td">
-                <button className="primary-button" onClick={()=> showEditForm(game.id)}>
+            <div className="buttons td">
+                <button className="primary-button content" onClick={()=> showEditForm(game.id)}>
                     <img src={pen}/>
                    <p> Ändra </p></button>
-                <button className="secondary-button" onClick={()=>removeGame(game.id)}>
+                <button className="secondary-button content" onClick={()=>removeGame(game.id)}>
                     <img src={bin}/>
                 </button>
             
-            </p>
+            </div>
         </div>
     )
 }

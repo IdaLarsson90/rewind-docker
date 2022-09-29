@@ -20,3 +20,8 @@ header {
         color: $yellow
     }
 }
+@media only screen and (max-width: 480px) {
+    header {
+        display: flex;
+    }
+}

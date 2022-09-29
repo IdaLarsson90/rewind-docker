@@ -10,8 +10,10 @@ const GameForm = () =>{
 
     return (
         <div className="accordion-body box">
-            <div className="accordion">
+            <div className="accordion ">
+                
                 {submit ? (<SubmitGame />):(<EditGame/>)}
+
             </div>
         </div>
     );

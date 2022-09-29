@@ -6,6 +6,7 @@ import { useGameStore } from "../../store/gameStore";
 import { useFilterStore } from "../../store/filterStore";
 import { usePlayerStore } from "../../store/playerStore";
 import { Player, Game } from '../../models/data';
+// import { useAccordianStore } from "../../store/accordianStore";
 
 const FilterBar = () => {
     const [config, setConfig] = useState<boolean>(false);
@@ -16,7 +17,9 @@ const FilterBar = () => {
     const setWinners = useFilterStore((state) => state.setWinners)
     const setPickedGame = useFilterStore((state) => state.setPickedGame)
     const [uniqueGames, setUniqueGames] = useState<Game[]>([])
-    
+    // const isAccordianVisible = useAccordianStore((state)=>state.isAccordianVisible)
+    // const toggleAccordianVisible = useAccordianStore((state)=>state.toggleAccordianVisible)
+
     useEffect(() => {
       const allGames = games.map( game => game.game)
       const uniqueGames = [...new Set(allGames)]
@@ -181,22 +184,33 @@ useEffect(() => {
             reset()
         }
     }
+    function toggleAccordian(e:any) {
+      console.log(e.target.id)
+      e.currentTarget.parentNode.classList.toggle("active")
+    }
 
     return(
-        <section className="filterBar">            
-            <div className="filterButtons">
-                <div className='filterBox'>
-                    <button type='button' onClick={handleClick} className='reset'>Visa alla spel</button>
-                    <button type='button' onClick={handleClick} className ='noWinners'>Visa alla spel utan en vinnare</button>
-                    <div>    
-                        <p>Klicka på knappen för att välja ett specifikt spel eller en specifik spelare</p>
-                        <button type='button' onClick={handleClick} className ='toggleFilter'>{config ? "Välj spel" : "Välj spelare"}</button>
-                        {
-                            config ? (<PlayerDetails />) : (<GameDetails uniqueGames={uniqueGames}/>)
-                        }
+        <section className="filterBar accordion-body">    
+         
+            <div className="container">
+              <h2 onClick={(e)=>{toggleAccordian(e)}} className='label'>Filtrera</h2>
+              <div className="content">
+                  <div className="filterButtons">
+                      <div className='filterBox'>
+                        <button type='button' onClick={handleClick} className='reset'>Visa alla spel</button>
+                        <button type='button' onClick={handleClick} className ='noWinners'>Visa alla spel utan en vinnare</button>
+                        <div>
+                            <p>Klicka på knappen för att välja ett specifikt spel eller en specifik spelare</p>
+                            <button type='button' onClick={handleClick} className ='toggleFilter'>{config ? "Välj spel" : "Välj spelare"}</button>
+                            {
+                                config ? (<PlayerDetails />) : (<GameDetails uniqueGames={uniqueGames}/>)
+                            }
+                        </div>
                     </div>
                 </div>
+                 
             </div>
+          </div>
         </section>
     )
 }
