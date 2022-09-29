@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Game } from "../../models/data"
 import { useGameStore } from "../../store/gameStore";
+import { useFilterStore } from "../../store/filterStore";
 
 const SubmitGame = () =>{
     const [formData, setFormData] = useState<Game>({
@@ -12,6 +13,8 @@ const SubmitGame = () =>{
         playerTwoResult: "",
         id:0
     })
+    const isExpanded = useFilterStore((state=>state.isExpanded))
+    const setIsExpanded = useFilterStore((state=>state.setIsExpanded))
     const games = useGameStore((state) => state.games)
     const setGames = useGameStore((state) => state.setGames)
     const addGame = (formData:Game, setFormData:(game:Game)=>void) => { 
@@ -43,13 +46,18 @@ const SubmitGame = () =>{
         setFormData({ ...formData, [event.target.name]: event.target.value });
     }
 
-    function toggleAccordian(e:any) {
-        e.currentTarget.parentNode.classList.toggle("active")
-      }
+    function toggleAccordian() {
+        
+        if(isExpanded === "active"){
+            setIsExpanded("")
+        } else {
+            setIsExpanded("active")
+        }
+    }
 
     return (
-        <form className={`form container`}  onSubmit={handleSubmit}>
-            <h2 onClick={(e)=>{toggleAccordian(e)}} className="label" id="addGame">Lägg till nytt spel</h2>
+        <form className={`form container ${isExpanded}`}  onSubmit={handleSubmit}>
+            <h2 onClick={()=>{toggleAccordian()}} className="label" id="addGame">Lägg till nytt spel</h2>
             <div className="content">
                 <div>
                     <div>

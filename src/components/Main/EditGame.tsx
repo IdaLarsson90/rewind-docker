@@ -1,7 +1,7 @@
 import './EditGame.scss'
 import { useGameStore } from "../../store/gameStore";
 import { useFormStore } from "../../store/formStore";
-import { useState } from 'react';
+import { useFilterStore } from "../../store/filterStore";
 
 const EditGame = () => {
     const games = useGameStore((state) => state.games)
@@ -10,7 +10,8 @@ const EditGame = () => {
     const gameToEdit = useFormStore((state) => state.gameToEdit)
     const editFormData = useFormStore((state) => state.editFormData)
     const setEditFormData = useFormStore((state) => state.setEditFormData)
-    const [isExpanded, setIsExpanded] = useState("active")
+    const isExpanded = useFilterStore((state=>state.isExpanded))
+    const setIsExpanded = useFilterStore((state=>state.setIsExpanded))
 
     const saveEdit = (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -43,13 +44,19 @@ const EditGame = () => {
         setEditFormData({ ...editFormData, [event.target.name]: event.target.value });
     }
   
-    function toggleAccordian(e:any) {
-        setIsExpanded("active")
-      }
+    function toggleAccordian() {
+        console.log("klick")
+        console.log(isExpanded)
+        if(isExpanded == "active"){
+            setIsExpanded("")
+        } else {
+            setIsExpanded("active")
+        }
+    }
 
     return(
         <form className={`form container ${isExpanded}`} onSubmit={saveEdit}>
-          <h2 onClick={(e)=>{toggleAccordian(e)}} className='label'>Ändra ett spel</h2>
+          <h2 onClick={()=>{toggleAccordian()}} className='label'>Ändra ett spel</h2>
             <div className="content">
                 <div>
                     <div>
@@ -86,7 +93,7 @@ const EditGame = () => {
             
             <div className="form-footer">
                 <input className="primary-button" type="submit" id="button-green" value="Spara ändringar" />
-                <button className='secondary-button' onClick={()=>{setSubmit(true); toggleAccordian}}>Stäng</button>
+                <button className='secondary-button' onClick={()=>{setSubmit(true); toggleAccordian()}}>Stäng</button>
             </div>
             </div>
         </form>

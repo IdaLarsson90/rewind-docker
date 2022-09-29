@@ -73,7 +73,7 @@ p, input[type=text], input[type=date], select, label, td, .secondary-button{
         font-size: 30px;
         transform: translateY(-50%);
     }
-    .active.label::before {
+    .active .label::before, .active.label::before {
         content: '-';
         font-size: 30px;
     }
