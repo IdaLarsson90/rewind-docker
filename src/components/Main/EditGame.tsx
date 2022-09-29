@@ -45,8 +45,6 @@ const EditGame = () => {
     }
   
     function toggleAccordian() {
-        console.log("klick")
-        console.log(isExpanded)
         if(isExpanded == "active"){
             setIsExpanded("")
         } else {
