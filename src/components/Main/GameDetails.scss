@@ -1,20 +1,20 @@
-@import "../models/variables";
+@import "../../models/variables";
 
-.playerDetails{
+.gameDetails{
     // position: relative;
     select {
         font-size: 1rem;
     }
-    .playerInfo{
+    .gameInfo{
         border: 1px solid $dark-yellow;
-        border-radius: 5px;
-        box-shadow: 0px 0px 10px $dark-grey;
+        // border-radius: 5px;
+        // box-shadow: 0px 0px 10px $dark-grey;
         // position: absolute;
         // left: 0;
         // top: 30px;
-        margin: 1rem;
+        // margin: 1rem;
         padding: 1rem;
-        max-width: 300px;
+        max-width: 600px;
         p {
             font-family: 'Montserrat', sans-serif;;
         }

@@ -1,5 +1,5 @@
 
-export interface FormState {
+export interface FormState { 
   game: string;
   date: string;
   playerOneName: string;
@@ -26,6 +26,6 @@ export interface Player {
 
 export type GameContextType = {
   games: Game[], 
-  addGame: (formData:any, setFormData:any)=>void, 
+  addGame: (formData:Game, setFormData:(game:Game)=>void)=>void, 
   setGames: (games:Game[])=>void
 }

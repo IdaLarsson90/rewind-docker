@@ -1,8 +1,8 @@
 import './PlayerDetails.scss'
-import { usePlayerStore } from "../store/playerStore";
-import { useGameStore } from "../store/gameStore";
-import { useFilterStore } from "../store/filterStore";
-import { Game, Player } from "../models/data"
+import { usePlayerStore } from "../../store/playerStore";
+import { useGameStore } from "../../store/gameStore";
+import { useFilterStore } from "../../store/filterStore";
+import { Game, Player } from "../../models/data"
 
 const PlayerDetails = () => {
     const games = useGameStore((state) => state.games)

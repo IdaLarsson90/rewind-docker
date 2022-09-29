@@ -1,10 +1,10 @@
 import './GameDetails.scss'
-import { useGameStore } from "../store/gameStore";
-import {useFilterStore} from "../store/filterStore"
-import { Game, Player } from '../models/data';
+import { useGameStore } from "../../store/gameStore";
+import {useFilterStore} from "../../store/filterStore"
+import { Game, Player } from '../../models/data';
 
 interface Props{
-    uniqueGames: any;
+    uniqueGames: Game[];
 }
 
 const GameDetails = ({uniqueGames}: Props) => {
@@ -12,9 +12,9 @@ const GameDetails = ({uniqueGames}: Props) => {
     const setGamesToShow = useGameStore((state) => state.setGamesToShow)
     const pickedGame = useFilterStore((state)=>state.pickedGame)
     const setPickedGame = useFilterStore((state) => state.setPickedGame)
-    const winner = useFilterStore((state)=>state.winner)
+    const winners = useFilterStore((state)=>state.winners)
     
-    const filterByGame = (event:any) =>{
+    const filterByGame = (event:React.ChangeEvent<HTMLSelectElement>) =>{
         const query = event.target.value
 
         let filteredList;
@@ -54,8 +54,8 @@ const GameDetails = ({uniqueGames}: Props) => {
           </select>
             {
             pickedGame !=="all" ? (
-                <p className='gameInfo'> {winner.map((player:Player, i:number)=>{
-                    if(i + 1 === winner.length || winner.length === 0) {
+                <p className='gameInfo'> {winners.map((player:Player, i:number)=>{
+                    if(i + 1 === winners.length || winners.length === 0) {
                         return <span key={i}> {player.name} </span>
                     } 
                     else {

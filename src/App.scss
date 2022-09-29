@@ -8,11 +8,15 @@ body{
     margin: 0 auto;
     background-color: $light-grey;
     overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+    .app {
+    margin: 0 auto;
+    
+    }
 }
 
-.app {
-    margin: 0 auto;
-}
+
 
 // GENERIC STYLES
 
@@ -45,3 +49,43 @@ p, input[type=text], input[type=date], select, label, td, .secondary-button{
     background: $dark-red;
     box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
   }
+
+@media only screen and (max-width: 480px) {
+    //ACCORDION STYLE
+    .accordion {
+        
+        .container {
+            position: relative;
+            // margin: 10px 10px;
+        }
+        .container.true .content {
+            height: 100%;
+          }
+        .container.true .label::before {
+        content: '-';
+        font-size: 30px;
+        }
+        .label{
+            cursor: pointer;
+            position: relative;
+        }
+        .label::before {
+            content: '+';
+            position: absolute;
+            top: 50%;
+            right: 5px;
+            font-size: 30px;
+            transform: translateY(-50%);
+        }
+        .content {
+            position: relative;
+            // background: white;
+            height: 0;
+            // font-size: 20px;
+            // text-align: justify;
+            // width: 780px;
+            overflow: hidden;
+            transition: 0.5s;
+          }
+    }
+}

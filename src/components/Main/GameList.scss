@@ -1,4 +1,4 @@
-@import "../models/variables";
+@import "../../models/variables";
 
 .gameList {
     background-color: #fff;
@@ -16,6 +16,7 @@
         height: fit-content;
         .tr{
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             .td {
                 margin: 0;

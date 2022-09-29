@@ -1,4 +1,5 @@
 import create from "zustand";
+import { Player } from "../models/data";
 
 interface FilterStore {
    
@@ -6,8 +7,8 @@ interface FilterStore {
     setPickedPlayer: (pickedPlayer:string)=>void;
     pickedGame: string;
     setPickedGame: (pickedGame:string)=>void;
-    winner: any,
-    setWinner: (winner:object)=>void
+    winners: Player[], 
+    setWinners: (winners:Player[])=>void
 }
 
 export const useFilterStore = create<FilterStore>((set, get)=>({
@@ -19,9 +20,9 @@ export const useFilterStore = create<FilterStore>((set, get)=>({
     setPickedGame: (pickedGame)=> set(state =>({
         pickedGame: pickedGame
     })),
-    winner: [{name: "", wins: 0}],
-    setWinner: (winner)=> set(state =>({
-        winner: winner
+    winners: [{name: "", numberOfWins: 0}],
+    setWinners: (winners)=> set(state =>({
+        winners: winners
     }))
 })) 
 

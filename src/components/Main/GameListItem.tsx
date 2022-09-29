@@ -1,11 +1,11 @@
-import { Game } from "../models/data"
-import bin from "../assets/bin.svg"
-import pen from "../assets/pen.svg"
-import { useGameStore } from "../store/gameStore";
+import { Game } from "../../models/data"
+import bin from "../../assets/bin.svg"
+import pen from "../../assets/pen.svg"
+import { useGameStore } from "../../store/gameStore";
 
 interface Props{
     game: Game,
-    showEditForm:any,
+    showEditForm:(id:number)=>void, 
 }
 
 const GameListItem = ({game, showEditForm} :Props) => {

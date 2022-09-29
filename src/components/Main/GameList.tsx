@@ -1,10 +1,10 @@
 import './GameList.scss'
-import { Game } from "../models/data"
+import { Game } from "../../models/data"
 import GameListItem from './GameListItem'
-import { useGameStore } from "../store/gameStore";
+import { useGameStore } from "../../store/gameStore";
 
 interface Props {
-  showEditForm:any;
+  showEditForm:(id:number)=>void; 
 }
 
 const GameList = ({showEditForm}: Props) => {

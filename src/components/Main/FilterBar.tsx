@@ -1,11 +1,11 @@
 import './FilterBar.scss'
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import PlayerDetails from "./PlayerDetails"
 import GameDetails from "./GameDetails"
-import { useGameStore } from "../store/gameStore";
-import { useFilterStore } from "../store/filterStore";
-import { usePlayerStore } from "../store/playerStore";
-import { Player, Game } from '../models/data';
+import { useGameStore } from "../../store/gameStore";
+import { useFilterStore } from "../../store/filterStore";
+import { usePlayerStore } from "../../store/playerStore";
+import { Player, Game } from '../../models/data';
 
 const FilterBar = () => {
     const [config, setConfig] = useState<boolean>(false);
@@ -13,7 +13,7 @@ const FilterBar = () => {
     const gamesToShow = useGameStore((state) => state.gamesToShow)
     const setGamesToShow = useGameStore((state) => state.setGamesToShow)
     const setPickedPlayer = useFilterStore((state)=>state.setPickedPlayer)
-    const setWinner = useFilterStore((state) => state.setWinner)
+    const setWinners = useFilterStore((state) => state.setWinners)
     const setPickedGame = useFilterStore((state) => state.setPickedGame)
     const [uniqueGames, setUniqueGames] = useState<Game[]>([])
     
@@ -135,6 +135,7 @@ useEffect(() => {
           }
         }
     })
+    
     let a = [playerWins[0]]
     playerWins.filter((i:Player) => {
       if (i.numberOfWins === a[0].numberOfWins && i.name !== a[0].name) {
@@ -147,10 +148,10 @@ useEffect(() => {
     })
 
     if (a[0] === undefined) {
-      setWinner([{name: "Ingen", wins: 0}])
+      setWinners([{name: "Ingen", numberOfWins: 0}]) 
       setPickedGame("all")
     } else {
-      setWinner(a)
+      setWinners(a)
     }
   }, [gamesToShow]) 
 
@@ -170,8 +171,8 @@ useEffect(() => {
     setGamesToShow(gamesCopy) 
   }
 
-    function handleClick(e:any){
-        let className = e.target.className;
+    function handleClick(e:React.MouseEvent<HTMLButtonElement>){ 
+        let className = e.currentTarget.className;
         if (className ==="toggleFilter") {
             setConfig(!config)
         }  else if (className ==="noWinners") {
@@ -185,7 +186,7 @@ useEffect(() => {
         <section className="filterBar">            
             <div className="filterButtons">
                 <div className='filterBox'>
-                    <button type='button' onClick={handleClick} className ='reset'>Visa alla spel</button>
+                    <button type='button' onClick={handleClick} className='reset'>Visa alla spel</button>
                     <button type='button' onClick={handleClick} className ='noWinners'>Visa alla spel utan en vinnare</button>
                     <div>    
                         <p>Klicka på knappen för att välja ett specifikt spel eller en specifik spelare</p>

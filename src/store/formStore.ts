@@ -1,13 +1,13 @@
 import create from "zustand";
-import {FormState} from '../models/data'
+import {FormState, Game} from '../models/data'
 
 interface FormStore {
     submit: boolean;
     setSubmit: (submit: boolean)=> void;
-    gameToEdit: any;
-    setGameToEdit: (gameToEdit: FormState)=>void;
-    editFormData: FormState;
-    setEditFormData: (editFormData: FormState)=>void;
+    gameToEdit: Game;
+    setGameToEdit: (gameToEdit: Game)=>void;
+    editFormData: Game;
+    setEditFormData: (editFormData: Game)=>void;
 }
 
 export const useFormStore = create<FormStore>((set, get)=>({
@@ -15,7 +15,15 @@ export const useFormStore = create<FormStore>((set, get)=>({
     setSubmit: (submit)=> set(state =>({
         submit: submit
     })),
-    gameToEdit: [],
+    gameToEdit: {
+        game: "",
+        date: "",
+        playerOneName: "",
+        playerOneResult: "",
+        playerTwoName: "",
+        playerTwoResult: "",
+        id: 0
+    }, 
     setGameToEdit: (array)=> set(state =>({
         gameToEdit: array
     })),
