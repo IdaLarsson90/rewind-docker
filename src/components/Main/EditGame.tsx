@@ -42,7 +42,7 @@ const EditGame = () => {
     }
   
     function toggleAccordian(e:any) {
-        console.log(e.target.id)
+        console.log(e.currentTarget)
         e.currentTarget.parentNode.classList.toggle("active")
       }
 
@@ -85,7 +85,7 @@ const EditGame = () => {
             
             <div className="form-footer">
                 <input className="primary-button" type="submit" id="button-green" value="Spara ändringar" />
-                <button className='secondary-button' onClick={()=>{setSubmit(true); toggleAccordianVisible()}}>Stäng</button>
+                <button className='secondary-button' onClick={()=>{setSubmit(true); toggleAccordian}}>Stäng</button>
             </div>
             </div>
         </form>
