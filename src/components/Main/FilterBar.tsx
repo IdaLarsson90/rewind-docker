@@ -196,8 +196,8 @@ useEffect(() => {
               <div className="content">
                   <div className="filterButtons">
                       <div className='filterBox'>
-                        <button type='button' onClick={handleClick} className='secondary-button reset'>Visa alla spel</button>
-                        <button type='button' onClick={handleClick} className ='secondary-button noWinners'>Visa alla spel utan en vinnare</button>
+                        <button type='button' onClick={handleClick} className='reset'>Visa alla spel</button>
+                        <button type='button' onClick={handleClick} className ='noWinners'>Visa alla spel utan en vinnare</button>
                         <div>
                             <p>Klicka på knappen för att välja ett specifikt spel eller en specifik spelare</p>
                             <button type='button' onClick={handleClick} className ='toggleFilter'>{config ? "Välj spel" : "Välj spelare"}</button>
